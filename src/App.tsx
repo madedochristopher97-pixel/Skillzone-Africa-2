@@ -18,6 +18,7 @@ import InstructorOnboarding from './pages/InstructorOnboarding';
 import ApplicationSubmitted from './pages/ApplicationSubmitted';
 import CareerPathDetails from './pages/CareerPathDetails';
 import InstructorDashboard from './pages/InstructorDashboard';
+import CategoryDetails from './pages/CategoryDetails';
 import InstructorDashboardOverview from './pages/instructor/InstructorDashboardOverview';
 import InstructorCourses from './pages/instructor/InstructorCourses';
 import InstructorUploads from './pages/instructor/InstructorUploads';
@@ -89,6 +90,7 @@ function AppContent() {
           <Route path="/application-submitted" element={<ApplicationSubmitted />} />
           <Route path="/course-published-success" element={<CoursePublishedSuccess />} />
           <Route path="/career-paths/:id" element={<CareerPathDetails />} />
+          <Route path="/categories/:categoryId" element={<CategoryDetails />} />
           
           <Route path="/instructor-dashboard" element={
             <ProtectedRoute role="instructor">
