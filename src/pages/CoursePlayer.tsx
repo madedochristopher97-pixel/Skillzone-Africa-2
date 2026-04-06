@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
+import { DURATIONS, EASINGS } from '../constants/animations';
 import { 
   Play, 
   Settings, 
@@ -205,25 +206,39 @@ export default function CoursePlayer() {
               <div className="flex gap-10 border-b border-[#c5c6d2]/50">
                 <button 
                   onClick={() => setActiveTab('notes')}
-                  className={`pb-5 font-bold flex items-center gap-2 font-headline transition-all ${
+                  className={`relative pb-5 font-bold flex items-center gap-2 font-headline transition-all ${
                     activeTab === 'notes' 
-                      ? 'text-[#00113a] border-b-4 border-[#ffbf00]' 
+                      ? 'text-[#00113a]' 
                       : 'text-[#757682] hover:text-[#00113a]'
                   }`}
                 >
                   <Edit3 className="w-5 h-5" />
                   Notes
+                  {activeTab === 'notes' && (
+                    <motion.div 
+                      layoutId="playerTabIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-[#ffbf00]"
+                      transition={{ duration: DURATIONS.fast, ease: EASINGS.default }}
+                    />
+                  )}
                 </button>
                 <button 
                   onClick={() => setActiveTab('resources')}
-                  className={`pb-5 font-bold flex items-center gap-2 font-headline transition-all ${
+                  className={`relative pb-5 font-bold flex items-center gap-2 font-headline transition-all ${
                     activeTab === 'resources' 
-                      ? 'text-[#00113a] border-b-4 border-[#ffbf00]' 
+                      ? 'text-[#00113a]' 
                       : 'text-[#757682] hover:text-[#00113a]'
                   }`}
                 >
                   <FolderOpen className="w-5 h-5" />
                   Resources
+                  {activeTab === 'resources' && (
+                    <motion.div 
+                      layoutId="playerTabIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-[#ffbf00]"
+                      transition={{ duration: DURATIONS.fast, ease: EASINGS.default }}
+                    />
+                  )}
                 </button>
               </div>
 
@@ -319,27 +334,40 @@ export default function CoursePlayer() {
                       )}
                     </button>
                     
-                    {isExpanded && !isLocked && (
-                      <div className="space-y-1 pl-2">
-                        {module.lessons.map((lesson, lIndex) => (
-                          <div 
-                            key={lIndex} 
-                            className={`flex items-center gap-3 p-3 rounded-xl text-sm ${
-                              lesson.completed 
-                                ? 'text-green-700 bg-green-50/80 font-medium' 
-                                : lesson.active
-                                ? 'text-[#00113a] font-extrabold border-l-4 border-[#ffbf00] bg-[#ffbf00]/10'
-                                : 'text-[#757682] hover:bg-[#f7f4ef] transition-colors cursor-pointer'
-                            }`}
-                          >
-                            {lesson.completed && <CheckCircle className="w-5 h-5" />}
-                            {lesson.active && <PlayCircle className="w-5 h-5 text-[#ffbf00]" />}
-                            {lesson.locked && <Lock className="w-5 h-5" />}
-                            <span>{lesson.title}</span>
+                    <AnimatePresence>
+                      {isExpanded && !isLocked && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: DURATIONS.medium, ease: EASINGS.default }}
+                          className="overflow-hidden"
+                        >
+                          <div className="space-y-1 pl-2 pb-4">
+                            {module.lessons.map((lesson, lIndex) => (
+                              <motion.div 
+                                key={lIndex} 
+                                initial={{ x: -10, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: lIndex * 0.05, duration: DURATIONS.fast }}
+                                className={`flex items-center gap-3 p-3 rounded-xl text-sm ${
+                                  lesson.completed 
+                                    ? 'text-green-700 bg-green-50/80 font-medium' 
+                                    : lesson.active
+                                    ? 'text-[#00113a] font-extrabold border-l-4 border-[#ffbf00] bg-[#ffbf00]/10'
+                                    : 'text-[#757682] hover:bg-[#f7f4ef] transition-colors cursor-pointer'
+                                }`}
+                              >
+                                {lesson.completed && <CheckCircle className="w-5 h-5" />}
+                                {lesson.active && <PlayCircle className="w-5 h-5 text-[#ffbf00]" />}
+                                {lesson.locked && <Lock className="w-5 h-5" />}
+                                <span>{lesson.title}</span>
+                              </motion.div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}

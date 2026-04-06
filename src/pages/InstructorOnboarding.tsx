@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Check, Plus, X, UploadCloud, Link as LinkIcon, UserCircle, Smartphone, Landmark, Globe, CircleDot, Circle, Info, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { pageVariants, DURATIONS, EASINGS } from '../constants/animations';
 
 export default function InstructorOnboarding() {
   const [step, setStep] = useState(1);
+  const [direction, setDirection] = useState(0); // 1 for forward, -1 for backward
   const navigate = useNavigate();
   const { login, user } = useAuth();
+  const shouldReduceMotion = useReducedMotion();
   const [expertise, setExpertise] = useState(['IT', 'Business']);
   const [paymentMethod, setPaymentMethod] = useState('mpesa'); // 'mpesa', 'bank', 'paypal'
   const [formData, setFormData] = useState({
@@ -17,6 +21,11 @@ export default function InstructorOnboarding() {
     password: '',
     confirmPassword: ''
   });
+
+  const paginate = (newStep: number) => {
+    setDirection(newStep > step ? 1 : -1);
+    setStep(newStep);
+  };
 
   const toggleExpertise = (item: string) => {
     if (expertise.includes(item)) {
@@ -34,9 +43,9 @@ export default function InstructorOnboarding() {
           <img src="https://drive.google.com/thumbnail?id=11ee_UL2J5eym9KSOjW98ttpk78O11E4Z&sz=w500" alt="SkillsZone Africa" className="h-8 object-contain" referrerPolicy="no-referrer" />
         </Link>
         <div className="hidden md:flex gap-8 items-center">
-          <span className={`font-medium font-headline cursor-pointer transition-colors duration-200 ${step === 1 ? 'text-[#002366] font-bold border-b-2 border-[#ffdfa0]' : 'text-[#757682] hover:text-[#002366]'}`} onClick={() => setStep(1)}>Your Info</span>
-          <span className={`font-medium font-headline cursor-pointer transition-colors duration-200 ${step === 2 ? 'text-[#002366] font-bold border-b-2 border-[#ffdfa0]' : 'text-[#757682] hover:text-[#002366]'}`} onClick={() => setStep(2)}>Expertise</span>
-          <span className={`font-medium font-headline cursor-pointer transition-colors duration-200 ${step === 3 ? 'text-[#002366] font-bold border-b-2 border-[#ffdfa0]' : 'text-[#757682] hover:text-[#002366]'}`} onClick={() => setStep(3)}>Payout</span>
+          <span className={`font-medium font-headline cursor-pointer transition-colors duration-200 ${step === 1 ? 'text-[#002366] font-bold border-b-2 border-[#ffdfa0]' : 'text-[#757682] hover:text-[#002366]'}`} onClick={() => paginate(1)}>Your Info</span>
+          <span className={`font-medium font-headline cursor-pointer transition-colors duration-200 ${step === 2 ? 'text-[#002366] font-bold border-b-2 border-[#ffdfa0]' : 'text-[#757682] hover:text-[#002366]'}`} onClick={() => paginate(2)}>Expertise</span>
+          <span className={`font-medium font-headline cursor-pointer transition-colors duration-200 ${step === 3 ? 'text-[#002366] font-bold border-b-2 border-[#ffdfa0]' : 'text-[#757682] hover:text-[#002366]'}`} onClick={() => paginate(3)}>Payout</span>
         </div>
         <div className="flex items-center gap-4">
           <UserCircle className="text-[#002366] w-8 h-8 cursor-pointer active:scale-95 transition-all" />
@@ -52,9 +61,14 @@ export default function InstructorOnboarding() {
               {/* Step 1 */}
               <div className="flex flex-col items-center gap-2 z-10">
                 {step > 1 ? (
-                  <div className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm cursor-pointer" onClick={() => setStep(1)}>
+                  <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm cursor-pointer" 
+                    onClick={() => paginate(1)}
+                  >
                     <Check className="w-5 h-5" strokeWidth={3} />
-                  </div>
+                  </motion.div>
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-[#ffbf00] text-[#261a00] flex items-center justify-center shadow-md ring-4 ring-[#ffbf00]/20">
                     <span className="font-headline font-bold">1</span>
@@ -65,15 +79,25 @@ export default function InstructorOnboarding() {
               
               {/* Connector */}
               <div className="absolute top-5 left-0 w-full h-[2px] bg-[#e5e2dd] -z-0">
-                <div className={`h-full bg-[#ffbf00] transition-all duration-300 ${step === 1 ? 'w-0' : step === 2 ? 'w-1/2' : 'w-full'}`}></div>
+                <motion.div 
+                  className="h-full bg-[#ffbf00]"
+                  initial={false}
+                  animate={{ width: step === 1 ? '0%' : step === 2 ? '50%' : '100%' }}
+                  transition={{ duration: DURATIONS.slow, ease: EASINGS.default }}
+                ></motion.div>
               </div>
               
               {/* Step 2 */}
               <div className="flex flex-col items-center gap-2 z-10">
                 {step > 2 ? (
-                  <div className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm cursor-pointer" onClick={() => setStep(2)}>
+                  <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm cursor-pointer" 
+                    onClick={() => paginate(2)}
+                  >
                     <Check className="w-5 h-5" strokeWidth={3} />
-                  </div>
+                  </motion.div>
                 ) : step === 2 ? (
                   <div className="w-10 h-10 rounded-full bg-[#ffbf00] text-[#261a00] flex items-center justify-center shadow-md ring-4 ring-[#ffbf00]/20">
                     <span className="font-headline font-bold">2</span>
@@ -103,13 +127,22 @@ export default function InstructorOnboarding() {
           </div>
 
           {/* Form Content */}
-          <div className="max-w-xl mx-auto space-y-10">
-            {step === 1 && (
-              <>
-                <header className="space-y-2">
-                  <h1 className="text-4xl font-headline font-extrabold text-[#00113a] tracking-tight leading-tight">Become an Instructor</h1>
-                  <p className="text-[#444650] font-body">Join thousands of African professionals sharing their expertise and building the continent's largest learning community.</p>
-                </header>
+          <div className="max-w-xl mx-auto overflow-hidden">
+            <AnimatePresence mode="wait" custom={direction}>
+              {step === 1 && (
+                <motion.div
+                  key="step1"
+                  custom={direction}
+                  variants={pageVariants}
+                  initial={shouldReduceMotion ? false : (direction === 0 ? false : (direction > 0 ? "initialForward" : "initialBackward"))}
+                  animate={direction > 0 ? "animateForward" : (direction < 0 ? "animateBackward" : { opacity: 1, x: 0 })}
+                  exit={direction > 0 ? "exitForward" : "exitBackward"}
+                  className="space-y-10"
+                >
+                  <header className="space-y-2">
+                    <h1 className="text-4xl font-headline font-extrabold text-[#00113a] tracking-tight leading-tight">Become an Instructor</h1>
+                    <p className="text-[#444650] font-body">Join thousands of African professionals sharing their expertise and building the continent's largest learning community.</p>
+                  </header>
                 <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setStep(2); }}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col">
@@ -202,11 +235,19 @@ export default function InstructorOnboarding() {
                     </button>
                   </div>
                 </form>
-              </>
+              </motion.div>
             )}
 
             {step === 2 && (
-              <>
+              <motion.div
+                key="step2"
+                custom={direction}
+                variants={pageVariants}
+                initial={shouldReduceMotion ? false : (direction > 0 ? "initialForward" : "initialBackward")}
+                animate={direction > 0 ? "animateForward" : "animateBackward"}
+                exit={direction > 0 ? "exitForward" : "exitBackward"}
+                className="space-y-10"
+              >
                 <header className="space-y-2">
                   <h1 className="text-4xl font-headline font-extrabold text-[#00113a] tracking-tight leading-tight">Mastery Details</h1>
                   <p className="text-[#444650] font-body">Help us understand your professional background to match you with the right opportunities.</p>
@@ -279,11 +320,19 @@ export default function InstructorOnboarding() {
                     </button>
                   </div>
                 </form>
-              </>
+              </motion.div>
             )}
 
             {step === 3 && (
-              <>
+              <motion.div
+                key="step3"
+                custom={direction}
+                variants={pageVariants}
+                initial={shouldReduceMotion ? false : (direction > 0 ? "initialForward" : "initialBackward")}
+                animate={direction > 0 ? "animateForward" : "animateBackward"}
+                exit={direction > 0 ? "exitForward" : "exitBackward"}
+                className="space-y-10"
+              >
                 <header className="space-y-2">
                   <h1 className="text-4xl font-headline font-extrabold text-[#00113a] tracking-tight leading-tight">How would you like to get paid?</h1>
                   <p className="text-[#444650] font-body text-lg">Select your preferred payment method to receive your earnings every Friday.</p>
@@ -476,10 +525,11 @@ export default function InstructorOnboarding() {
                     </div>
                   </div>
                 </form>
-              </>
+              </motion.div>
             )}
-          </div>
-        </section>
+          </AnimatePresence>
+        </div>
+      </section>
 
         {/* Right Column: Visual Side (45%) */}
         <section className="hidden md:flex md:w-[45%] bg-[#002366] relative flex-col justify-end p-16 overflow-hidden">

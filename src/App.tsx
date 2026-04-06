@@ -4,13 +4,17 @@
  */
 
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
+import { pageVariants } from './constants/animations';
+import React, { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
+import CategoryDetails from './pages/CategoryDetails';
 import CoursePlayer from './pages/CoursePlayer';
 import Checkout from './pages/Checkout';
 import Auth from './pages/Auth';
@@ -18,7 +22,6 @@ import InstructorOnboarding from './pages/InstructorOnboarding';
 import ApplicationSubmitted from './pages/ApplicationSubmitted';
 import CareerPathDetails from './pages/CareerPathDetails';
 import InstructorDashboard from './pages/InstructorDashboard';
-import CategoryDetails from './pages/CategoryDetails';
 import InstructorDashboardOverview from './pages/instructor/InstructorDashboardOverview';
 import InstructorCourses from './pages/instructor/InstructorCourses';
 import InstructorUploads from './pages/instructor/InstructorUploads';
@@ -55,6 +58,32 @@ function ProtectedRoute({ children, role }: { children: React.ReactNode, role?: 
 
 function AppContent() {
   const location = useLocation();
+  const shouldReduceMotion = useReducedMotion();
+  const [prevDepth, setPrevDepth] = useState(0);
+  const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+
+  const getDepth = (path: string) => {
+    if (path === '/') return 0;
+    if (path.startsWith('/courses/')) {
+      if (path.includes('/learn')) return 4;
+      if (path.includes('/checkout')) return 3;
+      return 2;
+    }
+    if (path === '/courses') return 1;
+    if (path === '/auth') return 1;
+    if (path === '/instructor-onboarding') return 1;
+    if (path === '/application-submitted') return 2;
+    if (path.startsWith('/instructor-dashboard')) return 2;
+    if (path.startsWith('/learner-dashboard')) return 2;
+    return 1;
+  };
+
+  useEffect(() => {
+    const currentDepth = getDepth(location.pathname);
+    setDirection(currentDepth >= prevDepth ? 'forward' : 'backward');
+    setPrevDepth(currentDepth);
+  }, [location.pathname, prevDepth]);
+
   const hideNavAndFooter = 
     location.pathname === '/instructor-onboarding' || 
     location.pathname === '/application-submitted' || 
@@ -66,59 +95,70 @@ function AppContent() {
   const hideFooter = hideNavAndFooter || location.pathname.endsWith('/checkout') || location.pathname.endsWith('/learn');
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-hidden">
       <ScrollToTop />
       {!hideNavAndFooter && <Navbar />}
-      <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:courseId" element={<CourseDetails />} />
-          <Route path="/courses/:courseId/learn" element={
-            <ProtectedRoute>
-              <CoursePlayer />
-            </ProtectedRoute>
-          } />
-          <Route path="/courses/:courseId/checkout" element={
-            <ProtectedRoute>
-              <Checkout />
-            </ProtectedRoute>
-          } />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/instructor-onboarding" element={<InstructorOnboarding />} />
-          <Route path="/application-submitted" element={<ApplicationSubmitted />} />
-          <Route path="/course-published-success" element={<CoursePublishedSuccess />} />
-          <Route path="/career-paths/:id" element={<CareerPathDetails />} />
-          <Route path="/categories/:categoryId" element={<CategoryDetails />} />
-          
-          <Route path="/instructor-dashboard" element={
-            <ProtectedRoute role="instructor">
-              <InstructorDashboard />
-            </ProtectedRoute>
-          }>
-            <Route index element={<InstructorDashboardOverview />} />
-            <Route path="courses" element={<InstructorCourses />} />
-            <Route path="uploads" element={<InstructorUploads />} />
-            <Route path="earnings" element={<InstructorEarnings />} />
-            <Route path="students" element={<InstructorStudents />} />
-            <Route path="settings" element={<InstructorSettings />} />
-            <Route path="course-builder" element={<CourseBuilder />} />
-          </Route>
+      <main className="flex-grow relative">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={location.pathname}
+            variants={pageVariants}
+            initial={shouldReduceMotion ? false : (direction === 'forward' ? "initialForward" : "initialBackward")}
+            animate={shouldReduceMotion ? false : (direction === 'forward' ? "animateForward" : "animateBackward")}
+            exit={shouldReduceMotion ? false : (direction === 'forward' ? "exitForward" : "exitBackward")}
+            className="w-full h-full"
+          >
+            <Routes location={location}>
+              <Route path="/" element={<Home />} />
+              <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:courseId" element={<CourseDetails />} />
+              <Route path="/courses/:courseId/learn" element={
+                <ProtectedRoute>
+                  <CoursePlayer />
+                </ProtectedRoute>
+              } />
+              <Route path="/courses/:courseId/checkout" element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              } />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/instructor-onboarding" element={<InstructorOnboarding />} />
+              <Route path="/application-submitted" element={<ApplicationSubmitted />} />
+              <Route path="/course-published-success" element={<CoursePublishedSuccess />} />
+              <Route path="/career-paths/:id" element={<CareerPathDetails />} />
+              <Route path="/categories/:categoryId" element={<CategoryDetails />} />
+              
+              <Route path="/instructor-dashboard" element={
+                <ProtectedRoute role="instructor">
+                  <InstructorDashboard />
+                </ProtectedRoute>
+              }>
+                <Route index element={<InstructorDashboardOverview />} />
+                <Route path="courses" element={<InstructorCourses />} />
+                <Route path="uploads" element={<InstructorUploads />} />
+                <Route path="earnings" element={<InstructorEarnings />} />
+                <Route path="students" element={<InstructorStudents />} />
+                <Route path="settings" element={<InstructorSettings />} />
+                <Route path="course-builder" element={<CourseBuilder />} />
+              </Route>
 
-          <Route path="/learner-dashboard" element={
-            <ProtectedRoute>
-              <LearnerDashboard />
-            </ProtectedRoute>
-          }>
-            <Route index element={<LearnerDashboardOverview />} />
-            <Route path="courses" element={<LearnerCourses />} />
-            <Route path="certificates" element={<LearnerCertificates />} />
-            <Route path="explore" element={<LearnerExplore />} />
-            <Route path="profile" element={<LearnerProfile />} />
-            <Route path="settings" element={<LearnerSettings />} />
-          </Route>
-        </Routes>
+              <Route path="/learner-dashboard" element={
+                <ProtectedRoute>
+                  <LearnerDashboard />
+                </ProtectedRoute>
+              }>
+                <Route index element={<LearnerDashboardOverview />} />
+                <Route path="courses" element={<LearnerCourses />} />
+                <Route path="certificates" element={<LearnerCertificates />} />
+                <Route path="explore" element={<LearnerExplore />} />
+                <Route path="profile" element={<LearnerProfile />} />
+                <Route path="settings" element={<LearnerSettings />} />
+              </Route>
+            </Routes>
+          </motion.div>
+        </AnimatePresence>
       </main>
       {!hideFooter && <Footer />}
     </div>

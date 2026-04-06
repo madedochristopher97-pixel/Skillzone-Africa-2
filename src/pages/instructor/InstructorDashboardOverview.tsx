@@ -1,16 +1,48 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
+import { DURATIONS, EASINGS } from '../../constants/animations';
 
 export default function InstructorDashboardOverview() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 15 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: DURATIONS.medium,
+        ease: EASINGS.enter
+      }
+    }
+  };
+
   return (
-    <div className="space-y-12">
+    <motion.div 
+      initial={shouldReduceMotion ? false : "hidden"}
+      animate="show"
+      variants={container}
+      className="space-y-12"
+    >
       {/* Welcome Header */}
-      <section>
+      <motion.section variants={item}>
         <h2 className="font-headline font-black text-4xl text-primary tracking-tighter">Welcome back, Fredrick</h2>
         <p className="text-slate-500 font-body mt-2">Your academy is growing. Here’s how you’re performing this month.</p>
-      </section>
+      </motion.section>
       {/* Stats Bento Grid */}
-      <section className="grid grid-cols-12 gap-6">
+      <motion.section variants={item} className="grid grid-cols-12 gap-6">
         {/* Large Earnings Card */}
         <div className="col-span-12 md:col-span-5 bg-surface-container-lowest p-8 rounded-3xl flex flex-col justify-between group hover:scale-[1.01] transition-transform duration-300">
           <div>
@@ -42,9 +74,9 @@ export default function InstructorDashboardOverview() {
             <span className="material-symbols-outlined text-[120px]">school</span>
           </div>
         </div>
-      </section>
+      </motion.section>
       {/* Earnings Chart Section */}
-      <section className="grid grid-cols-12 gap-8">
+      <motion.section variants={item} className="grid grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-10 rounded-3xl">
           <div className="flex justify-between items-center mb-12">
             <h3 className="font-headline font-bold text-xl text-primary">Monthly Earnings</h3>
@@ -130,9 +162,9 @@ export default function InstructorDashboardOverview() {
             </button>
           </div>
         </div>
-      </section>
+      </motion.section>
       {/* My Courses Table */}
-      <section className="pb-24">
+      <motion.section variants={item} className="pb-24">
         <div className="flex justify-between items-end mb-8">
           <div>
             <h3 className="font-headline font-bold text-2xl text-primary">My Courses</h3>
@@ -252,7 +284,7 @@ export default function InstructorDashboardOverview() {
             </tbody>
           </table>
         </div>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
   );
 }

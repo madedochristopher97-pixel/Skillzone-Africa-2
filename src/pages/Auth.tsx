@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { DURATIONS, EASINGS, SPRINGS, tabContentVariants } from '../constants/animations';
 
 export default function Auth() {
   const location = useLocation();
   const navigate = useNavigate();
   const { login } = useAuth();
+  const shouldReduceMotion = useReducedMotion();
   const [isSignUp, setIsSignUp] = useState(location.state?.isSignUp ?? true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -49,38 +51,57 @@ export default function Auth() {
           )}
 
           {/* Tab Switcher */}
-          <div className="inline-flex p-1 mb-10 bg-[#e5e2dd] rounded-full w-full max-w-[280px]">
+          <div className="relative inline-flex p-1 mb-10 bg-[#e5e2dd] rounded-full w-full max-w-[280px] isolation-auto">
             <button
               onClick={() => setIsSignUp(false)}
-              className={`flex-1 py-2 px-6 rounded-full text-sm font-semibold transition-all duration-200 ${
-                !isSignUp
-                  ? 'bg-[#ffbf00] text-[#002366] shadow-sm'
-                  : 'text-slate-600 hover:text-[#00113a]'
+              className={`relative flex-1 py-2 px-6 rounded-full text-sm font-semibold transition-colors duration-200 z-10 ${
+                !isSignUp ? 'text-[#002366]' : 'text-slate-600 hover:text-[#00113a]'
               }`}
             >
               Sign In
+              {!isSignUp && (
+                <motion.div 
+                  layoutId="activeTab" 
+                  className="absolute inset-0 bg-[#ffbf00] rounded-full shadow-sm -z-10"
+                  transition={SPRINGS.default}
+                />
+              )}
             </button>
             <button
               onClick={() => setIsSignUp(true)}
-              className={`flex-1 py-2 px-6 rounded-full text-sm font-semibold transition-all duration-200 ${
-                isSignUp
-                  ? 'bg-[#ffbf00] text-[#002366] shadow-sm'
-                  : 'text-slate-600 hover:text-[#00113a]'
+              className={`relative flex-1 py-2 px-6 rounded-full text-sm font-semibold transition-colors duration-200 z-10 ${
+                isSignUp ? 'text-[#002366]' : 'text-slate-600 hover:text-[#00113a]'
               }`}
             >
               Sign Up
+              {isSignUp && (
+                <motion.div 
+                  layoutId="activeTab" 
+                  className="absolute inset-0 bg-[#ffbf00] rounded-full shadow-sm -z-10"
+                  transition={SPRINGS.default}
+                />
+              )}
             </button>
           </div>
 
           {/* Form Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-[#00113a] mb-2 font-headline">
-              {isSignUp ? 'Create your account' : 'Welcome back'}
-            </h1>
-            <p className="text-[#444650]">
-              {isSignUp ? 'Join the tribe of modern African experts.' : 'Sign in to continue your learning journey.'}
-            </p>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={isSignUp ? 'signup-header' : 'signin-header'}
+              variants={tabContentVariants}
+              initial={shouldReduceMotion ? false : "initialForward"}
+              animate="animateForward"
+              exit="exitForward"
+              className="mb-8"
+            >
+              <h1 className="text-3xl font-bold text-[#00113a] mb-2 font-headline">
+                {isSignUp ? 'Create your account' : 'Welcome back'}
+              </h1>
+              <p className="text-[#444650]">
+                {isSignUp ? 'Join the tribe of modern African experts.' : 'Sign in to continue your learning journey.'}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Form */}
           <form className="space-y-5" onSubmit={handleSubmit}>

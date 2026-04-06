@@ -1,19 +1,50 @@
 import { PlayCircle, Award, BookOpen, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
+import { DURATIONS, EASINGS } from '../../constants/animations';
 
 export default function LearnerDashboardOverview() {
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const shouldReduceMotion = useReducedMotion();
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 15 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: DURATIONS.medium,
+        ease: EASINGS.enter
+      }
+    }
+  };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-10">
+    <motion.div 
+      initial={shouldReduceMotion ? false : "hidden"}
+      animate="show"
+      variants={container}
+      className="max-w-6xl mx-auto space-y-10"
+    >
       {/* Welcome Section */}
-      <div>
+      <motion.div variants={item}>
         <h1 className="font-headline text-3xl md:text-4xl font-bold text-[#00113a] mb-2">Welcome back, Aisha</h1>
         <p className="text-[#6B7280]">{today}</p>
-      </div>
+      </motion.div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-[#00113a] rounded-3xl p-8 text-white relative overflow-hidden shadow-lg">
           <div className="relative z-10">
             <p className="text-sm font-bold tracking-wider text-white/80 mb-2 uppercase">Courses Enrolled</p>
@@ -37,10 +68,10 @@ export default function LearnerDashboardOverview() {
           </div>
           <Award className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10" />
         </div>
-      </div>
+      </motion.div>
 
       {/* Continue Learning */}
-      <div>
+      <motion.div variants={item}>
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-headline text-2xl font-bold text-[#00113a]">Continue Learning</h2>
           <Link to="/learner-dashboard/courses" className="text-sm font-bold text-[#D48806] hover:text-[#00113a] transition-colors underline underline-offset-4">
@@ -102,10 +133,10 @@ export default function LearnerDashboardOverview() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* My Courses Grid */}
-      <div>
+      <motion.div variants={item}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
           <h2 className="font-headline text-2xl font-bold text-[#00113a]">My Courses</h2>
           <div className="flex gap-6 text-sm font-semibold">
@@ -186,7 +217,7 @@ export default function LearnerDashboardOverview() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
