@@ -85,7 +85,7 @@ export default function CoursePlayer() {
       <header className="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#00113a] shadow-md font-headline text-white">
         <div className="flex items-center gap-4">
           <Link to="/" className="flex items-center">
-            <img src="https://drive.google.com/thumbnail?id=11ee_UL2J5eym9KSOjW98ttpk78O11E4Z&sz=w500" alt="SkillsZone Africa" className="h-8 object-contain brightness-0 invert" referrerPolicy="no-referrer" />
+            <img src="/Logo 2@2x.png" alt="SkillsZone Africa" className="h-8 object-contain" />
           </Link>
           <div className="hidden md:block h-6 w-px bg-white/20"></div>
           <span className="hidden md:inline-block text-sm font-medium text-slate-200 truncate max-w-xs lg:max-w-md">

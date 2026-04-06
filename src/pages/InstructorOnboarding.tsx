@@ -5,6 +5,7 @@ import { Check, Plus, X, UploadCloud, Link as LinkIcon, UserCircle, Smartphone, 
 export default function InstructorOnboarding() {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
+  const { login, user } = useAuth();
   const [expertise, setExpertise] = useState(['IT', 'Business']);
   const [paymentMethod, setPaymentMethod] = useState('mpesa'); // 'mpesa', 'bank', 'paypal'
 
@@ -264,7 +265,14 @@ export default function InstructorOnboarding() {
                   <p className="text-[#444650] font-body text-lg">Select your preferred payment method to receive your earnings every Friday.</p>
                 </header>
                 
-                <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); navigate('/application-submitted'); }}>
+                <form className="space-y-8" onSubmit={(e) => { 
+                  e.preventDefault(); 
+                  // Update user role in context
+                  if (user) {
+                    login({ ...user, role: 'instructor' });
+                  }
+                  navigate('/application-submitted'); 
+                }}>
                   {/* Payment Method Cards */}
                   <div className="grid grid-cols-1 gap-4 mb-8">
                     {/* M-Pesa */}

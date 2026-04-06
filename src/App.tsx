@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
@@ -65,6 +66,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       {!hideNavAndFooter && <Navbar />}
       <main className="flex-grow">
         <Routes>

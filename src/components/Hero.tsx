@@ -46,7 +46,7 @@ export default function Hero() {
             <img 
               alt="African student studying" 
               className="w-full h-full object-cover" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCATvVeIg4b2ZWLGtvuZiuj43nY5UqccAkLxzOUSB7ZrfHtu72aYJ11n1cxWPYoQ9kK-wbfbSh5QHHbnIJ3N8WKTcUYjcIWKmJ4u3DmvcPTmAEZJBSrcUhA_M1iXOCmDAildrku5WTf4lgNsunqrXikDhROuv6rue7JFSUYQbpaVphmYfEkrNXyFBqEepXVG71bJAKoe1TJ9t1_h8Yo51N0RI5HwcPqgiPocDHmTQ39s-JvZDohU5N6himWREoHQUqUnoDgWjcSoA"
+              src="/Hero Skillz@2x.png"
               referrerPolicy="no-referrer"
             />
           </div>
