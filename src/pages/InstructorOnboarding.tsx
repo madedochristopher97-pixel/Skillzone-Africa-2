@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, Plus, X, UploadCloud, Link as LinkIcon, UserCircle, Smartphone, Landmark, Globe, CircleDot, Circle, Info, ArrowRight } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function InstructorOnboarding() {
   const [step, setStep] = useState(1);
