@@ -46,7 +46,7 @@ export default function Hero() {
             <img 
               alt="African student studying" 
               className="w-full h-full object-cover" 
-              src="/Hero Skillz@2x.png"
+              src="/Hero Skills 4@2x.png"
               referrerPolicy="no-referrer"
             />
           </div>
