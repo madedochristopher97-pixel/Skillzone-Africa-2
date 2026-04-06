@@ -51,31 +51,6 @@ export default function Hero() {
             />
           </div>
           
-          {/* Floating Card */}
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl max-w-xs hidden md:block"
-          >
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-12 h-12 rounded-full bg-[#ffdfa0] flex items-center justify-center">
-                <Sparkles className="text-[#261a00] w-6 h-6" fill="currentColor" />
-              </div>
-              <div>
-                <p className="font-bold text-[#00113a]">New Course!</p>
-                <p className="text-sm text-[#444650]">Mobile Dev for Startups</p>
-              </div>
-            </div>
-            <div className="h-2 w-full bg-[#f6f3ee] rounded-full overflow-hidden">
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: "75%" }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="h-full bg-[#795900]"
-              />
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
