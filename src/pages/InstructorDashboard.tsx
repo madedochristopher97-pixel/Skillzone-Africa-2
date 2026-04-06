@@ -1,5 +1,20 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { 
+  LayoutDashboard, 
+  BookOpen, 
+  Wand2, 
+  CloudUpload, 
+  CreditCard, 
+  Users, 
+  Settings,
+  Plus,
+  Search,
+  Bell,
+  HelpCircle,
+  X,
+  Check
+} from 'lucide-react';
 
 export default function InstructorDashboard() {
   const location = useLocation();
@@ -42,169 +57,153 @@ export default function InstructorDashboard() {
         </div>
         <nav className="flex-1 space-y-2">
           <NavLink to="/instructor-dashboard" end className={navLinkClass}>
-            <span className="material-symbols-outlined">dashboard</span>
+            <LayoutDashboard size={20} strokeWidth={2} />
             Dashboard
           </NavLink>
           <NavLink to="/instructor-dashboard/courses" className={navLinkClass}>
-            <span className="material-symbols-outlined">school</span>
+            <BookOpen size={20} strokeWidth={2} />
             Courses
           </NavLink>
           <NavLink to="/instructor-dashboard/course-builder" className={navLinkClass}>
-            <span className="material-symbols-outlined">architecture</span>
+            <Wand2 size={20} strokeWidth={2} />
             Course Builder
           </NavLink>
           <NavLink to="/instructor-dashboard/uploads" className={navLinkClass}>
-            <span className="material-symbols-outlined">upload_file</span>
+            <CloudUpload size={20} strokeWidth={2} />
             Uploads
           </NavLink>
           <NavLink to="/instructor-dashboard/earnings" className={navLinkClass}>
-            <span className="material-symbols-outlined">payments</span>
+            <CreditCard size={20} strokeWidth={2} />
             Earnings
           </NavLink>
           <NavLink to="/instructor-dashboard/students" className={navLinkClass}>
-            <span className="material-symbols-outlined">group</span>
+            <Users size={20} strokeWidth={2} />
             Students
           </NavLink>
           <NavLink to="/instructor-dashboard/settings" className={navLinkClass}>
-            <span className="material-symbols-outlined">settings</span>
+            <Settings size={20} strokeWidth={2} />
             Settings
           </NavLink>
         </nav>
         <div className="px-6 mt-auto">
           <NavLink to="/instructor-dashboard/course-builder" className="w-full py-4 bg-primary text-white rounded-xl font-headline font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all">
-            <span className="material-symbols-outlined text-sm">add</span>
+            <Plus size={18} strokeWidth={3} />
             Create New Course
           </NavLink>
         </div>
       </aside>
+      
       {/* Main Canvas */}
-      <main className="ml-64 min-h-screen flex flex-col">
-        {/* TopAppBar Component */}
-        <header className="flex justify-between items-center h-20 px-12 sticky top-0 bg-[#fcf9f4]/80 backdrop-blur-md z-40">
-          <div className="flex items-center gap-4">
-            <h1 className="font-headline font-extrabold text-2xl text-primary tracking-tight">Dashboard</h1>
-          </div>
-          <div className="flex items-center gap-8">
-            <div className="relative group">
-              <span className="absolute inset-y-0 left-3 flex items-center text-slate-400 group-focus-within:text-secondary transition-colors">
-                <span className="material-symbols-outlined">search</span>
-              </span>
-              <input className="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-secondary-fixed w-64 transition-all" placeholder="Search courses..." type="text" />
+      <div className="ml-64 min-h-screen flex flex-col">
+        {/* Top Header */}
+        {!isCourseBuilder && (
+          <header className="h-20 bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 flex items-center justify-between sticky top-0 z-40">
+            <div className="flex-1 max-w-xl">
+              <div className="relative group">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={18} />
+                <input 
+                  type="text" 
+                  placeholder="Search your courses, students, or resources..." 
+                  className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+              </div>
             </div>
-            <div className="flex items-center gap-4 relative">
-              <button 
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="text-slate-500 hover:text-primary transition-all relative"
-              >
-                <span className="material-symbols-outlined">notifications</span>
-                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-              </button>
+            
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <button 
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="w-10 h-10 flex items-center justify-center rounded-full text-slate-600 hover:bg-slate-100 transition-all relative"
+                >
+                  <Bell size={20} />
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+                
+                {showNotifications && (
+                  <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 p-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <h4 className="font-headline font-bold text-sm mb-4">Notifications</h4>
+                    <div className="space-y-4">
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 text-blue-600">
+                          <Users size={14} />
+                        </div>
+                        <div>
+                          <p className="text-xs font-medium">New student enrolled</p>
+                          <p className="text-[10px] text-slate-500">Sarah joined "Strategic Business Growth"</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
               
-              {/* Notifications Dropdown */}
-              {showNotifications && (
-                <div className="absolute top-12 right-12 w-80 bg-white rounded-2xl shadow-xl border border-surface-container-highest overflow-hidden z-50">
-                  <div className="p-4 border-b border-surface-container-highest bg-surface-container-low">
-                    <h3 className="font-headline font-bold text-primary">Notifications</h3>
-                  </div>
-                  <div className="max-h-96 overflow-y-auto">
-                    <div className="p-4 border-b border-surface-container-highest hover:bg-surface-container-low transition-colors cursor-pointer">
-                      <p className="font-body text-sm text-primary"><span className="font-bold">New Student!</span> Sarah M. enrolled in "Strategic Business Growth".</p>
-                      <p className="text-xs text-slate-500 mt-1">2 hours ago</p>
-                    </div>
-                    <div className="p-4 border-b border-surface-container-highest hover:bg-surface-container-low transition-colors cursor-pointer">
-                      <p className="font-body text-sm text-primary"><span className="font-bold">Course Milestone:</span> You reached 500 students!</p>
-                      <p className="text-xs text-slate-500 mt-1">1 day ago</p>
-                    </div>
-                    <div className="p-4 hover:bg-surface-container-low transition-colors cursor-pointer">
-                      <p className="font-body text-sm text-primary"><span className="font-bold">New Follower:</span> John D. started following you.</p>
-                      <p className="text-xs text-slate-500 mt-1">3 days ago</p>
-                    </div>
-                  </div>
-                  <div className="p-3 text-center border-t border-surface-container-highest">
-                    <button className="text-sm font-bold text-secondary font-headline hover:underline">Mark all as read</button>
-                  </div>
-                </div>
-              )}
-
               <button 
                 onClick={() => setShowHelpModal(true)}
-                className="text-slate-500 hover:text-primary transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-slate-600 hover:bg-slate-100 transition-all"
               >
-                <span className="material-symbols-outlined">help_outline</span>
+                <HelpCircle size={20} />
               </button>
+              
+              <div className="h-8 w-[1px] bg-slate-200 mx-2"></div>
+              
+              <div className="flex items-center gap-3 pl-2">
+                <div className="text-right hidden sm:block">
+                  <p className="text-xs font-bold font-headline text-[#002366]">Fredrick O.</p>
+                  <p className="text-[10px] text-slate-500 font-medium">Pro Instructor</p>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-headline font-bold">
+                  FO
+                </div>
+              </div>
             </div>
-          </div>
-        </header>
-        {/* Page Content */}
-        <div className="p-12 flex-1">
+          </header>
+        )}
+
+        <main className="flex-1 p-8">
           <Outlet />
-        </div>
-      </main>
-      
-      {/* Contextual FAB */}
-      {!isCourseBuilder && (
-        <NavLink to="/instructor-dashboard/course-builder" className="fixed bottom-12 right-12 bg-secondary-container text-on-secondary-container px-8 py-5 rounded-full font-headline font-black text-lg flex items-center gap-3 shadow-lg hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 z-50">
-          <span className="material-symbols-outlined text-2xl">upload</span>
-          Upload New Course
-        </NavLink>
-      )}
+        </main>
+      </div>
 
       {/* Help Modal */}
       {showHelpModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
+        <div className="fixed inset-0 bg-[#00113a]/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-[2rem] max-w-lg w-full p-8 shadow-2xl relative animate-in zoom-in-95 duration-200">
             <button 
               onClick={() => {
                 setShowHelpModal(false);
                 setHelpSubmitted(false);
-                setHelpQuery('');
               }}
-              className="absolute top-6 right-6 text-slate-400 hover:text-primary transition-colors"
+              className="absolute top-6 right-6 text-slate-400 hover:text-slate-600"
             >
-              <span className="material-symbols-outlined">close</span>
+              <X size={24} />
             </button>
             
             {!helpSubmitted ? (
               <>
-                <h2 className="font-headline font-bold text-2xl text-primary mb-2">Need Help?</h2>
-                <p className="text-slate-600 mb-6 text-sm">Send us your question and our support team will reply directly to your email.</p>
+                <h3 className="font-headline font-bold text-2xl text-[#00113a] mb-2">How can we help?</h3>
+                <p className="text-slate-600 text-sm mb-6">Describe the issue you're facing and our technical team will reach out within 24 hours.</p>
                 
                 <textarea 
                   value={helpQuery}
                   onChange={(e) => setHelpQuery(e.target.value)}
-                  placeholder="Describe your issue or question here..."
-                  className="w-full h-32 p-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-secondary-fixed resize-none mb-6 text-sm"
+                  placeholder="Tell us what's happening..."
+                  className="w-full h-32 p-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all resize-none mb-6 text-sm"
                 ></textarea>
                 
                 <button 
-                  onClick={() => {
-                    if(helpQuery.trim()) setHelpSubmitted(true);
-                  }}
-                  disabled={!helpQuery.trim()}
-                  className="w-full py-4 bg-primary text-white rounded-xl font-headline font-bold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => setHelpSubmitted(true)}
+                  className="w-full py-4 bg-primary text-white rounded-xl font-headline font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20"
                 >
-                  Send Message
+                  Send Request
                 </button>
               </>
             ) : (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="material-symbols-outlined text-3xl">check</span>
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Check size={32} strokeWidth={3} />
                 </div>
-                <h2 className="font-headline font-bold text-2xl text-primary mb-2">Message Sent!</h2>
-                <p className="text-slate-600 text-sm">We've received your query and will get back to you via email shortly.</p>
-                <button 
-                  onClick={() => {
-                    setShowHelpModal(false);
-                    setTimeout(() => {
-                      setHelpSubmitted(false);
-                      setHelpQuery('');
-                    }, 300);
-                  }}
-                  className="mt-8 px-8 py-3 bg-surface-container-low text-primary rounded-xl font-headline font-bold hover:bg-surface-container-highest transition-all"
-                >
-                  Close
-                </button>
+                <h3 className="font-headline font-bold text-2xl text-[#00113a] mb-2">Request Sent!</h3>
+                <p className="text-slate-600 text-sm">We've received your query. Check your inbox for a ticket confirmation soon.</p>
               </div>
             )}
           </div>

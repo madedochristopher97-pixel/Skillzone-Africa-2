@@ -1,5 +1,13 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { 
+  Rocket, 
+  Share2, 
+  Linkedin, 
+  Twitter, 
+  MessageCircle,
+  Eye
+} from 'lucide-react';
 
 export default function CoursePublishedSuccess() {
   const navigate = useNavigate();
@@ -15,8 +23,8 @@ export default function CoursePublishedSuccess() {
           
           {/* Celebration Header */}
           <div className="relative z-10 flex flex-col items-center">
-            <div className="w-24 h-24 bg-[#ffbf00] flex items-center justify-center rounded-full mb-8">
-              <span className="material-symbols-outlined text-[#6d5000] !text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>rocket_launch</span>
+            <div className="w-24 h-24 bg-[#ffbf00] flex items-center justify-center rounded-full mb-8 shadow-lg shadow-[#ffbf00]/20">
+              <Rocket className="text-[#6d5000] w-12 h-12" strokeWidth={2} />
             </div>
             <h1 className="font-headline text-[#00113a] text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
               Your Course is Live!
@@ -28,12 +36,12 @@ export default function CoursePublishedSuccess() {
 
           {/* Course Mini Preview */}
           <div className="mt-12 mb-12 flex justify-center">
-            <div className="bg-[#f6f3ee] rounded-2xl p-4 flex flex-col md:flex-row items-center gap-6 text-left w-full max-w-xl">
+            <div className="bg-[#f6f3ee] rounded-2xl p-4 flex flex-col md:flex-row items-center gap-6 text-left w-full max-w-xl border border-[#ebe8e3]">
               <div className="w-full md:w-32 h-24 rounded-xl overflow-hidden flex-shrink-0">
                 <img 
                   className="w-full h-full object-cover" 
                   alt="Modern business boardroom" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw8X25h4m1RKEa_97cOWhxAszWHwQwbi63QRqRDDfFWLeT7haHmKlNPmel9RcvoijAbAfEHQjdK8tIVL8lrGn7CHZpmFRDFwUK5WRKJANcOUKiDGs2rG38O2HoCCjxXC_tfFQcUYX_wVw3y2nBMr_3XIbpLWH0vQbFVgrKugjtu4cA3_EAPhJh9nBUi5_W4YlgB4BRQB9LPtQ2MSMp_MB68i-MIrFEEB2CxhgUfJI2In-VtYn1Z3UKj1fNsFod08uyNk8GOvijbg"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw8X25h4m1RKEa_97cOWhxAszWHwQwbi63QRqRDDfFWLeT7haHmKlNPmel9RcvoijAbAfEHQjdK8tIVL8lrGn7CHZpmFRDFwQwbi63QRqRDDfFWLeT7haHmKlNPmel9RcvoijAbAfEHQjdK8tIVL8lrGn7CHZpmFRDFwUK5WRKJANcOUKiDGs2rG38O2HoCCjxXC_tfFQcUYX_wVw3y2nBMr_3XIbpLWH0vQbFVgrKugjtu4cA3_EAPhJh9nBUi5_W4YlgB4BRQB9LPtQ2MSMp_MB68i-MIrFEEB2CxhgUfJI2In-VtYn1Z3UKj1fNsFod08uyNk8GOvijbg"
                 />
               </div>
               <div className="flex-grow">
@@ -44,8 +52,8 @@ export default function CoursePublishedSuccess() {
                 <h3 className="font-headline text-[#00113a] font-bold text-lg leading-tight">Strategic Business Growth</h3>
                 <p className="font-body text-[#00113a] font-bold mt-1">KSh 4,500</p>
               </div>
-              <div className="hidden md:block pr-4">
-                <span className="material-symbols-outlined text-[#757682]">visibility</span>
+              <div className="hidden md:block pr-4 opacity-40">
+                <Eye className="w-6 h-6 text-[#757682]" />
               </div>
             </div>
           </div>
@@ -55,28 +63,16 @@ export default function CoursePublishedSuccess() {
             <span className="font-label text-sm font-semibold text-[#757682] uppercase tracking-widest">Spread the word</span>
             <div className="flex gap-4">
               <button className="w-12 h-12 rounded-full bg-[#f0ede9] flex items-center justify-center text-[#002366] hover:bg-[#002366] hover:text-white transition-all duration-300">
-                <span className="material-symbols-outlined !text-2xl">share</span>
+                <Share2 className="w-5 h-5" strokeWidth={2.5} />
               </button>
-              <button className="w-12 h-12 rounded-full bg-[#f0ede9] flex items-center justify-center text-[#002366] hover:bg-[#0077b5] hover:text-white transition-all duration-300 group">
-                <img 
-                  className="w-5 h-5 grayscale group-hover:grayscale-0 transition-all group-hover:brightness-0 group-hover:invert" 
-                  alt="LinkedIn" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtRyPiu8OEaXx4UDE7gUGoW0EVQMwha5IgBCek55XnqLrm4BwxcXrqWUep5mVv3Q_wHtN0gXIyTbaHOTDs7BcHTJ4u-W6tNxT9gcUO3gjMD1H2W_OhpmYwOpuSwO7khN3kmuuCrOKpAXWQUNsoU0b0WMoZMUfgjO1BxnN2_yuGqXgYfux6sy-I_bGAUMyiIuJCOfP7J3BaG4zsfFRtnvswLn7xznn6dq2ffhSj_9ccYOy1sN6QMpWX5XgJCzlQjd7yNfrdPVaQ4Q"
-                />
+              <button className="w-12 h-12 rounded-full bg-[#f0ede9] flex items-center justify-center text-[#002366] hover:bg-[#0a66c2] hover:text-white transition-all duration-300 group">
+                <Linkedin className="w-5 h-5" strokeWidth={2} />
               </button>
-              <button className="w-12 h-12 rounded-full bg-[#f0ede9] flex items-center justify-center text-[#002366] hover:bg-[#1DA1F2] hover:text-white transition-all duration-300 group">
-                <img 
-                  className="w-5 h-5 grayscale group-hover:grayscale-0 transition-all group-hover:brightness-0 group-hover:invert" 
-                  alt="Twitter" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtDrLqnCAoTXeG5C6rX370JDcKShCzxt0z6En6u0W9OCPGGtZDfW-3gKt9fAq0KCR-GfI5KnwYzT5Ty2ESUaOCrcY4B0hHAKWGmjp7sj3cKQCm5IOMW0h7mZtSMGoai7pejJpMz1tSdhXMyEUdMhXDpNZ3MENsBGJVYZIkKnNCanY0gJ62yiX0f-_C94S2Rk5k9mKjcrZI9VQLADqOJJ9wONP0ZGdSGWGz0DVmZ-fe69PaaC8PFuRWMopW3MaTv0P4lMkH_o1wZA"
-                />
+              <button className="w-12 h-12 rounded-full bg-[#f0ede9] flex items-center justify-center text-[#002366] hover:bg-[#000000] hover:text-white transition-all duration-300 group">
+                <Twitter className="w-5 h-5" strokeWidth={2} />
               </button>
               <button className="w-12 h-12 rounded-full bg-[#f0ede9] flex items-center justify-center text-[#002366] hover:bg-[#25D366] hover:text-white transition-all duration-300 group">
-                <img 
-                  className="w-5 h-5 grayscale group-hover:grayscale-0 transition-all group-hover:brightness-0 group-hover:invert" 
-                  alt="WhatsApp" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYVl30miOK-pXlNcTOftspjLI-ZCsZYadseEo33z3L2YxFQILkn2Ku3zswMcO0uDnNL8YAuHfAiA9mlaWCf9fVkPm3jxHd5iZ7dsrS5Sl7ncq5y6TGq6ZLqqDyFngd8qATYyHMx6HbtZvOglx-6SNprG3mcMXHraw7RASJ9DJP9NxpdolhwUFyBQ9llLdxMGCn6roSxtlsM8VeglNplsi0Au6xQgsvzEyuu7yyP8uLrW2h0_7A9QYIrh7dKbe9D1AN2wad-z0Clg"
-                />
+                <MessageCircle className="w-5 h-5" strokeWidth={2} />
               </button>
             </div>
           </div>

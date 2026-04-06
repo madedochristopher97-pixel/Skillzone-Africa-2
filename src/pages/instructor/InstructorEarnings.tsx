@@ -1,66 +1,116 @@
 import React from 'react';
+import { Wallet, ArrowDown, Landmark, TrendingUp, CreditCard, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+  }
+};
 
 export default function InstructorEarnings() {
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center">
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="max-w-6xl mx-auto space-y-10"
+    >
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h2 className="font-headline font-black text-3xl text-primary tracking-tighter">Earnings & Payouts</h2>
-          <p className="text-slate-500 font-body mt-2">Track your revenue and manage withdrawal methods.</p>
+          <h1 className="font-headline font-black text-3xl text-[#00113a]">Financial Overview</h1>
+          <p className="text-slate-500 mt-1 font-medium">Track your revenue, payouts, and pending transactions.</p>
         </div>
-        <button className="bg-secondary-fixed text-on-secondary-fixed px-6 py-3 rounded-xl font-headline font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
-          <span className="material-symbols-outlined text-sm">account_balance_wallet</span>
-          Withdraw Funds
+        <button className="flex items-center gap-2 px-6 py-3 border-2 border-[#00113a] text-[#00113a] rounded-xl font-headline font-bold text-sm hover:bg-[#00113a]/5 transition-all">
+          <Landmark size={18} strokeWidth={2} />
+          Settlement Settings
         </button>
+      </header>
+
+      {/* Earnings Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div variants={itemVariants} className="bg-[#002366] p-8 rounded-[2.5rem] text-white shadow-xl shadow-blue-900/10 group relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-6 group-hover:bg-white group-hover:text-[#002366] transition-all duration-300">
+              <Wallet size={24} />
+            </div>
+            <p className="text-blue-100/60 text-sm font-medium mb-1 tracking-tight">Available Balance</p>
+            <h3 className="font-headline font-black text-3xl">KSh 42,500.00</h3>
+            <button className="mt-8 w-full py-4 bg-primary text-white rounded-xl font-headline font-bold text-sm hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-black/10">
+              Withdraw Funds
+            </button>
+          </div>
+          <motion.div 
+            className="absolute -right-8 -bottom-8 opacity-[0.05] text-white"
+            whileHover={{ scale: 1.1, rotate: 15 }}
+          >
+            <Wallet size={160} strokeWidth={1} />
+          </motion.div>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm group">
+          <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+            <TrendingUp size={24} />
+          </div>
+          <p className="text-slate-500 text-sm font-medium mb-1 tracking-tight">Total Revenue (All Time)</p>
+          <h3 className="font-headline font-black text-3xl text-[#00113a]">KSh 842,500.00</h3>
+          <div className="mt-4 flex items-center gap-2 text-xs font-bold text-emerald-600">
+            <TrendingUp size={14} />
+            <span>+15.2% from last month</span>
+          </div>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm group">
+          <div className="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 mb-6 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
+            <Clock size={24} />
+          </div>
+          <p className="text-slate-500 text-sm font-medium mb-1 tracking-tight">Pending Payout</p>
+          <h3 className="font-headline font-black text-3xl text-[#00113a]">KSh 12,000.00</h3>
+          <p className="mt-4 text-xs text-slate-400 font-medium italic">Settlement on Apr 15, 2024</p>
+        </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-primary text-white p-8 rounded-3xl">
-          <p className="text-primary-fixed-dim text-sm font-bold uppercase tracking-widest mb-2">Available Balance</p>
-          <h3 className="text-4xl font-headline font-black">KSh 12,400</h3>
-          <p className="text-sm mt-4 text-primary-fixed-dim">Next payout scheduled for 15th Apr</p>
+      {/* Recent Payouts */}
+      <section>
+        <div className="flex items-center justify-between mb-6 px-2">
+          <h2 className="font-headline font-bold text-xl text-[#00113a]">Recent Payouts</h2>
         </div>
-        <div className="bg-surface-container-lowest p-8 rounded-3xl">
-          <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-2">Pending Clearance</p>
-          <h3 className="text-4xl font-headline font-black text-primary">KSh 4,200</h3>
-          <p className="text-sm mt-4 text-slate-500">From recent course sales</p>
-        </div>
-        <div className="bg-surface-container-lowest p-8 rounded-3xl">
-          <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-2">Lifetime Earnings</p>
-          <h3 className="text-4xl font-headline font-black text-primary">KSh 148,500</h3>
-          <p className="text-sm mt-4 text-slate-500">Since joining SkillsZone</p>
-        </div>
-      </div>
-
-      <div className="bg-surface-container-lowest rounded-3xl p-8">
-        <h3 className="font-headline font-bold text-lg text-primary mb-6">Recent Transactions</h3>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 border-b border-surface-variant last:border-0">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                <span className="material-symbols-outlined">arrow_downward</span>
+        <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+          <div className="divide-y divide-slate-50">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="p-6 flex items-center gap-6 hover:bg-slate-50 transition-colors group">
+                <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
+                  <CreditCard size={20} />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-[#002366]">Payout to Bank Account •••• 4242</p>
+                  <p className="text-[10px] text-slate-500 mt-1 uppercase tracking-widest font-bold">Ref: SKZ-PO-2024-00{i}</p>
+                </div>
+                <div className="text-right">
+                  <h4 className="font-headline font-bold text-[#002366]">-KSh 25,000</h4>
+                  <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">Completed</p>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 opacity-0 group-hover:opacity-100 transition-all cursor-pointer hover:bg-blue-600 hover:text-white">
+                  <ArrowDown size={18} />
+                </div>
               </div>
-              <div>
-                <p className="font-bold text-sm text-primary">Course Sale: Mastering React 18</p>
-                <p className="text-xs text-slate-500">Today, 10:42 AM</p>
-              </div>
-            </div>
-            <span className="font-bold text-green-600">+ KSh 4,500</span>
-          </div>
-          <div className="flex items-center justify-between p-4 border-b border-surface-variant last:border-0">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-surface-container-low text-slate-600 rounded-full flex items-center justify-center">
-                <span className="material-symbols-outlined">account_balance</span>
-              </div>
-              <div>
-                <p className="font-bold text-sm text-primary">Withdrawal to Bank Account</p>
-                <p className="text-xs text-slate-500">Mar 28, 2024</p>
-              </div>
-            </div>
-            <span className="font-bold text-primary">- KSh 25,000</span>
+            ))}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </motion.div>
   );
 }
