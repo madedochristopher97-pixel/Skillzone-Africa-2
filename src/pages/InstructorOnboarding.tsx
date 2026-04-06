@@ -9,6 +9,14 @@ export default function InstructorOnboarding() {
   const { login, user } = useAuth();
   const [expertise, setExpertise] = useState(['IT', 'Business']);
   const [paymentMethod, setPaymentMethod] = useState('mpesa'); // 'mpesa', 'bank', 'paypal'
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    category: '',
+    password: '',
+    confirmPassword: ''
+  });
 
   const toggleExpertise = (item: string) => {
     if (expertise.includes(item)) {
@@ -111,6 +119,8 @@ export default function InstructorOnboarding() {
                         placeholder="e.g. Kofi Annan" 
                         type="text"
                         required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       />
                     </div>
                     <div className="flex flex-col">
@@ -120,6 +130,8 @@ export default function InstructorOnboarding() {
                         placeholder="kofi@skillszone.af" 
                         type="email"
                         required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       />
                     </div>
                   </div>
@@ -133,13 +145,20 @@ export default function InstructorOnboarding() {
                           className="w-full bg-[#f6f3ee] border-0 border-b-2 border-transparent focus:border-[#795900] focus:ring-0 focus:bg-white transition-all pl-16 pr-4 py-3 text-lg font-medium text-[#00113a] outline-none" 
                           placeholder="700 000 000" 
                           type="tel" 
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         />
                       </div>
                     </div>
                     <div className="flex flex-col">
                       <label className="font-label text-[11px] font-bold uppercase tracking-widest text-[#795900] mb-3">What will you teach?</label>
-                      <select className="w-full bg-[#f6f3ee] border-0 border-b-2 border-transparent focus:border-[#795900] focus:ring-0 focus:bg-white transition-all px-4 py-3 text-lg font-medium text-[#00113a] outline-none appearance-none">
-                        <option>Select a category</option>
+                      <select 
+                        className="w-full bg-[#f6f3ee] border-0 border-b-2 border-transparent focus:border-[#795900] focus:ring-0 focus:bg-white transition-all px-4 py-3 text-lg font-medium text-[#00113a] outline-none appearance-none"
+                        value={formData.category}
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        required
+                      >
+                        <option value="">Select a category</option>
                         <option>Software Development</option>
                         <option>Business & Strategy</option>
                         <option>Creative Arts</option>
@@ -157,6 +176,8 @@ export default function InstructorOnboarding() {
                         placeholder="••••••••" 
                         type="password"
                         required
+                        value={formData.password}
+                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       />
                     </div>
                     <div className="flex flex-col">
@@ -166,6 +187,8 @@ export default function InstructorOnboarding() {
                         placeholder="••••••••" 
                         type="password"
                         required
+                        value={formData.confirmPassword}
+                        onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                       />
                     </div>
                   </div>
@@ -268,10 +291,12 @@ export default function InstructorOnboarding() {
                 
                 <form className="space-y-8" onSubmit={(e) => { 
                   e.preventDefault(); 
-                  // Update user role in context
-                  if (user) {
-                    login({ ...user, role: 'instructor' });
-                  }
+                  // Perform login with Step 1 registration data
+                  login({
+                    name: formData.name,
+                    email: formData.email,
+                    role: 'instructor'
+                  });
                   navigate('/application-submitted'); 
                 }}>
                   {/* Payment Method Cards */}
