@@ -1,0 +1,248 @@
+import { Course, Testimonial, Category } from './types';
+
+export const CATEGORIES: Category[] = [
+  { id: '1', name: 'Formal Education', icon: 'School' },
+  { id: '2', name: 'Business & Finance', icon: 'Wallet' },
+  { id: '3', name: 'Creative Arts', icon: 'Palette' },
+  { id: '4', name: 'Tech & IT', icon: 'Terminal' },
+  { id: '5', name: 'Languages', icon: 'Languages' },
+  { id: '6', name: 'Personal Development', icon: 'Brain' },
+];
+
+export const COURSES: Course[] = [
+  {
+    id: '1',
+    title: 'Accounting 101: Mastering the Ledger in Modern Markets',
+    instructor: {
+      name: 'David Mensah',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAXy8I4Nu2oVtDNlbiQ_4AXJJ7qB5sxggWqx_eAMFgJ89cGJBYcDX39GfBSCEGUeHafIT_EreNLAD6AIIJWkHfSE0BUyb62DO9tHrdKfT9gZJGhNQsJBWVjSHwfrpybxjw7FtAAiWMSRv838tIB_w1N2cvR5ZPxTfaLQEN-B3H3DkBDYY3VjLzR0gk7jhy0fGrM1O690QLSACt6IHOifTcWpD5XHFk9uAVmIiYRItT-0pPDHVDy8c3waaX9lETP_mPnIBgCYSmLnA',
+    },
+    category: 'Business',
+    rating: 4.9,
+    students: '1.2k',
+    price: 'KSh 4,500',
+    image: 'https://images.pexels.com/photos/5466785/pexels-photo-5466785.jpeg?auto=compress&cs=tinysrgb&w=800',
+    featured: true,
+    tag: 'Featured',
+  },
+  {
+    id: '2',
+    title: 'Smartphone Photography Masterclass',
+    instructor: {
+      name: 'Amina Oke',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC2LEPaNQYZyctmtPfFqpERg3xylEmFJEdq4YXmKlSbXLeJBfM51qE4UTw9e_UR67X4FjjYEMQn-opamLfwIkLgzWbjAxvzcfuR491a-0Lkr0120DZAPqyPpmdabYiV0zJxIWYgBO44W6R5Mj2S4wdPU-7iZrFumXG7N2-FcfaaoHLCaci1p72fzHM9cdt9MeJJ_PGr2jSpSDVOP24lvNKvTbTg9p72sMa2aj1asmKS7IKUQw7OPz1entXnbNT3svGE0h2JKfcqEQ',
+    },
+    category: 'Creative',
+    rating: 4.8,
+    students: '850',
+    price: 'KSh 2,800',
+    image: 'https://images.pexels.com/photos/3314294/pexels-photo-3314294.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    id: '3',
+    title: 'Public Relations: The Modern African Voice',
+    instructor: {
+      name: 'Zainab Bello',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCFBXsJvvNuniTSLKhM8kcb6Rj5OqGEFEY60jmMVt-psWVslr7q7iIAIUTKVspELOcpLTZRvShV672uZYo7Ix9b4BRfOTqSoD3_SqbKaqmsHsxMbdw1XKoX3R8IYHElCGkj8kQQ7CajnbQATRCkVMxk337mmr6Y2WagAvMgDcyI-BlzRrfYm46gz5nspRztvzSd6-ZhfAlCpPF7fXQbN81-NjlsCpxepX7a2hR4wMaYGFoRI31Fycyafu-Lhk4zO09RATrseSz7ew',
+    },
+    category: 'Comms',
+    rating: 5.0,
+    students: '420',
+    price: 'KSh 6,200',
+    image: 'https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    id: '4',
+    title: 'Python for Beginners: From Zero to African Tech Hero',
+    instructor: {
+      name: 'Kofi Addo',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCve6wiMi2kUPz6UaZhpqamEeAfkkoTpd2RTVfhYUFUybU4jroswb7E0RVMkCIp-MWUN2yfB_VZUCSczg3dkuqvLipph88kjIixKedt5n0cCNcg49DiwWmM2WZ5IFcy5Lq5GZC0qSyPNO-DXCwppbcZA-BG6_g_f8C75N6dGo-glKFPfDAubRf_UDi3nTcBUaE8kNqGb_sfJRAlzFAsb8ZNCM6D0FjjEb6tJkGRRVlCdjl1aQdWSUNBJF5wM1EkwLqy9pwt2Vz7Vw',
+    },
+    category: 'Tech',
+    rating: 4.7,
+    students: '2.5k',
+    price: 'KSh 3,500',
+    image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+];
+
+export const ALL_COURSES: Course[] = [
+  ...COURSES,
+  {
+    id: '5',
+    title: 'Strategic Business Growth in Lagos',
+    instructor: {
+      name: 'Chinua Azikiwe',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC-1p4L0MBDscikvxeha4-aMR6PXf6nAxsb-U9haagk8bJCquVyLhcQa3Rfy-d57pZVORzgEYZZHbGCu_iIEVCS6QMzzjVWElnYGH4fHUmLAQgSnAuFQLI9r7xPniCMv5QbftuRDHt90GfPJgeJWSfVpwuHntd_DEOedbcVDcqyjXEZtgtxZGRUlyFpgr0Qohf7G8zK_U2gsApX1ABGep6x801qyKUvhAsDYF-wZKHpCMtm-x3lqudJ-Fa1QCvVxlwS6q9Fr-ANFw',
+    },
+    category: 'Business',
+    rating: 4.8,
+    students: '2.4k',
+    price: 'KSh 3,200',
+    image: 'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=800',
+    tag: 'Bestseller',
+  },
+  {
+    id: '6',
+    title: 'Full-Stack Web Development',
+    instructor: {
+      name: 'Sarah Mwangi',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCFBXsJvvNuniTSLKhM8kcb6Rj5OqGEFEY60jmMVt-psWVslr7q7iIAIUTKVspELOcpLTZRvShV672uZYo7Ix9b4BRfOTqSoD3_SqbKaqmsHsxMbdw1XKoX3R8IYHElCGkj8kQQ7CajnbQATRCkVMxk337mmr6Y2WagAvMgDcyI-BlzRrfYm46gz5nspRztvzSd6-ZhfAlCpPF7fXQbN81-NjlsCpxepX7a2hR4wMaYGFoRI31Fycyafu-Lhk4zO09RATrseSz7ew',
+    },
+    category: 'Tech',
+    rating: 5.0,
+    students: '1.1k',
+    price: 'KSh 4,500',
+    image: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    id: '7',
+    title: 'Visual Storytelling & Graphic Arts',
+    instructor: {
+      name: 'Kofi Mensah',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCve6wiMi2kUPz6UaZhpqamEeAfkkoTpd2RTVfhYUFUybU4jroswb7E0RVMkCIp-MWUN2yfB_VZUCSczg3dkuqvLipph88kjIixKedt5n0cCNcg49DiwWmM2WZ5IFcy5Lq5GZC0qSyPNO-DXCwppbcZA-BG6_g_f8C75N6dGo-glKFPfDAubRf_UDi3nTcBUaE8kNqGb_sfJRAlzFAsb8ZNCM6D0FjjEb6tJkGRRVlCdjl1aQdWSUNBJF5wM1EkwLqy9pwt2Vz7Vw',
+    },
+    category: 'Creative',
+    rating: 4.2,
+    students: '850',
+    price: 'KSh 1,800',
+    image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    id: '8',
+    title: 'Data Analysis for Social Impact',
+    instructor: {
+      name: 'Dr. Amara Okafor',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC-1p4L0MBDscikvxeha4-aMR6PXf6nAxsb-U9haagk8bJCquVyLhcQa3Rfy-d57pZVORzgEYZZHbGCu_iIEVCS6QMzzjVWElnYGH4fHUmLAQgSnAuFQLI9r7xPniCMv5QbftuRDHt90GfPJgeJWSfVpwuHntd_DEOedbcVDcqyjXEZtgtxZGRUlyFpgr0Qohf7G8zK_U2gsApX1ABGep6x801qyKUvhAsDYF-wZKHpCMtm-x3lqudJ-Fa1QCvVxlwS6q9Fr-ANFw',
+    },
+    category: 'Tech',
+    rating: 4.7,
+    students: '1.8k',
+    price: 'KSh 3,500',
+    image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    id: '9',
+    title: 'Leadership in the African Context',
+    instructor: {
+      name: 'Prof. John Kenyatta',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEze8IgVnbGXtzC8bw2I0bzHuLDsuYHxtzJ0w6EvqrVZACkMcpQu7vRvuBWcJdysGnpnosk8aZvX7mnXBSFFZmyVm7b20_ojXcK2eDxw4-e212eiIytmHa1I6XqU8CKkpxo8NeVHZowa4RID5FlEASug04Yc_M4iXqnMUFpL9cDoEFs9sV89asjL5YlLOqLv8baYYAyBZcTD3YpNgboVVFYXsj5oeMdweQ9NQOmCbIrFXmlWpta1GKW_vWQs2OkyTWMISRTKpjNg',
+    },
+    category: 'Business',
+    rating: 4.5,
+    students: '3.2k',
+    price: 'FREE',
+    image: 'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    id: '10',
+    title: 'Mastering Mobile Photography',
+    instructor: {
+      name: 'Fatima Toure',
+      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqhzAtpgYIdyIs_axNU7r4YQenQ4DpP8rgzSsv9hryXQb5vZ_jKOyEnQNX4y7bvJ9OnjlSfNeN-fdDH0gzGBTNf1d63bJUu3J-qe_LHwPQwsOXDz2m1uSGNkaSVI-_f1zia2Vpqn5iF1ANSXMzWpwAD6qx26RZ8sDLgAqvaMF8fzOrW5f4AliH-iQxxOq9Z9jdbk5Z3ZtVjzWljXfLTi30MwTmIitfJO0Thj2LWBBoZBeijeWF7ga8JzbB8ptHZ0Rsi8Wh7Jc4VQ',
+    },
+    category: 'Creative',
+    rating: 4.9,
+    students: '5k',
+    price: 'KSh 1,200',
+    image: 'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+];
+
+export interface CareerPath {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  heroImage?: string;
+  bgColor: string;
+  hoverColor: string;
+  heroTextColor: string;
+  longDescription?: string;
+  skills?: string[];
+  salaryRange?: string;
+  demand?: string;
+}
+
+export const CAREER_PATHS: CareerPath[] = [
+  {
+    id: 'software-engineer',
+    title: 'Software Engineer',
+    description: 'Design, develop, and maintain the software systems that power modern African businesses and applications.',
+    image: 'https://drive.google.com/thumbnail?id=1T0KrVT1LfAJAuvRhK0gHIX0nO0R2jeTp&sz=w800',
+    heroImage: 'https://drive.google.com/thumbnail?id=1TuNZCZUhiLZif7ZabQRDmCvb7H_PLfMQ&sz=w1200',
+    bgColor: '#ffe8d6',
+    hoverColor: '#0D79F2',
+    heroTextColor: 'text-white',
+    longDescription: 'Software Engineering is at the heart of Africa\'s digital transformation. As a software engineer, you will build scalable applications, design robust architectures, and solve complex problems that impact millions of lives. From fintech solutions in Lagos to agritech platforms in Nairobi, the demand for skilled developers has never been higher.',
+    skills: ['JavaScript/TypeScript', 'Python', 'React & Node.js', 'System Design', 'Cloud Computing (AWS/GCP)'],
+    salaryRange: 'KSh 150,000 - 450,000 / month',
+    demand: 'Very High',
+  },
+  {
+    id: 'data-scientist',
+    title: 'Data Scientist',
+    description: 'Turn complex data into actionable insights for high-impact decision making in global markets.',
+    image: 'https://drive.google.com/thumbnail?id=1T4y4ueYUj9lIbtMVdPYrN-C7hmIdGIHg&sz=w800',
+    heroImage: 'https://drive.google.com/thumbnail?id=1I77jmmeK8g7Zc4OpJBAxmaVeg7AvbmS-&sz=w1200',
+    bgColor: '#e8f5e9',
+    hoverColor: '#50D926',
+    heroTextColor: 'text-[#00113a]',
+    longDescription: 'Data is the new oil, and Data Scientists are the refiners. In this role, you will analyze vast amounts of structured and unstructured data to uncover hidden patterns, correlations, and insights. You will build predictive models that help businesses optimize their operations, understand customer behavior, and drive strategic growth across the continent.',
+    skills: ['Python/R', 'Machine Learning', 'SQL & NoSQL', 'Data Visualization', 'Statistical Analysis'],
+    salaryRange: 'KSh 180,000 - 500,000 / month',
+    demand: 'High',
+  },
+  {
+    id: 'graphic-design',
+    title: 'Graphic Design',
+    description: 'Create stunning visual concepts to communicate ideas that inspire, inform, and captivate consumers.',
+    image: 'https://drive.google.com/thumbnail?id=1AFmKNvrpoAcBRQDP2BpTZuSjd1CT4LlO&sz=w800',
+    heroImage: 'https://drive.google.com/thumbnail?id=1hu0Z4CWkRGfpJ6mFTygkhs5WR5hXFGJp&sz=w1200',
+    bgColor: '#e3f2fd',
+    hoverColor: '#F25E0D',
+    heroTextColor: 'text-white',
+    longDescription: 'Graphic Design is the art of visual communication. As a designer, you will combine typography, imagery, and color to craft compelling brand identities, marketing materials, and digital experiences. Your work will shape how African brands are perceived globally, blending traditional aesthetics with modern design principles.',
+    skills: ['Adobe Creative Suite', 'UI/UX Principles', 'Typography', 'Brand Identity', 'Illustration'],
+    salaryRange: 'KSh 80,000 - 250,000 / month',
+    demand: 'Medium to High',
+  },
+  {
+    id: 'content-creator',
+    title: 'Content Creator',
+    description: 'Harness digital platforms to tell compelling stories and build your unique African brand.',
+    image: 'https://drive.google.com/thumbnail?id=1sqUyg8NsD6ki8o6xVRw9XF7BiHNNgAAP&sz=w800',
+    heroImage: 'https://drive.google.com/thumbnail?id=1l_MBGofkWM5bhBw4RuIf36QO2t9_NsAb&sz=w1200',
+    bgColor: '#fbe9e7',
+    hoverColor: '#FFBF00',
+    heroTextColor: 'text-[#00113a]',
+    longDescription: 'Content Creation is redefining media and entertainment. Whether through video, audio, or written word, content creators are the new storytellers. You will learn to produce engaging content, build loyal communities, and monetize your digital presence across platforms like YouTube, TikTok, and Instagram, amplifying African voices worldwide.',
+    skills: ['Video Editing', 'Copywriting', 'Social Media Strategy', 'Audience Building', 'Analytics'],
+    salaryRange: 'Variable (KSh 50,000 - 1M+ / month)',
+    demand: 'High',
+  }
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: '1',
+    name: 'Mary Mbugua',
+    role: 'Marketing Lead, Nairobi',
+    avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB9eTUsiWQ9N7FO40rxw1FMPpzo-qalQQchliIQ5znnsIaX0PuiX4evADH16wAkMpYMvKQkPtXaXTcJ-aoD70GzZ04GdMUd3TmHSH1xOW-20_QeTW0DkIoCGEEnUHq-RdU5OMLIBiMa9wDNzpSJs01O4eUnSraYNtJL6QyZduZ-AinoBpuecLHlziNTHfYJopB0al0TPDhesRLWIBDs1qXRkcZTsS22JatCXrZhulUHBqw6K9GFxn1UbkKySN3KRRShFXpFq5EXrQ',
+    content: 'SkillsZone allowed me to pivot into digital marketing without quitting my day job. The instructors are from right here in Kenya, so they understand our market nuances.',
+  },
+  {
+    id: '2',
+    name: 'Kwame Owusu',
+    role: 'Junior Developer, Accra',
+    avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEze8IgVnbGXtzC8bw2I0bzHuLDsuYHxtzJ0w6EvqrVZACkMcpQu7vRvuBWcJdysGnpnosk8aZvX7mnXBSFFZmyVm7b20_ojXcK2eDxw4-e212eiIytmHa1I6XqU8CKkpxo8NeVHZowa4RID5FlEASug04Yc_M4iXqnMUFpL9cDoEFs9sV89asjL5YlLOqLv8baYYAyBZcTD3YpNgboVVFYXsj5oeMdweQ9NQOmCbIrFXmlWpta1GKW_vWQs2OkyTWMISRTKpjNg',
+    content: 'The Python course was hands-on and practical. Within three months of finishing, I landed my first internship. The community is supportive and inspiring.',
+  },
+  {
+    id: '3',
+    name: 'Fatima Hassan',
+    role: 'Entrepreneur, Lagos',
+    avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqhzAtpgYIdyIs_axNU7r4YQenQ4DpP8rgzSsv9hryXQb5vZ_jKOyEnQNX4y7bvJ9OnjlSfNeN-fdDH0gzGBTNf1d63bJUu3J-qe_LHwPQwsOXDz2m1uSGNkaSVI-_f1zia2Vpqn5iF1ANSXMzWpwAD6qx26RZ8sDLgAqvaMF8fzOrW5f4AliH-iQxxOq9Z9jdbk5Z3ZtVjzWljXfLTi30MwTmIitfJO0Thj2LWBBoZBeijeWF7ga8JzbB8ptHZ0Rsi8Wh7Jc4VQ',
+    content: 'Learning business finance helped me scale my small boutique. I finally understand my numbers, and it\'s all thanks to the expert tutors on this platform.',
+  },
+];
