@@ -7,6 +7,14 @@ export default function CourseBuilder() {
   const [difficulty, setDifficulty] = useState('All Levels');
   const [visibility, setVisibility] = useState('public');
   const [publishImmediately, setPublishImmediately] = useState(true);
+  
+  // Pricing States
+  const [pricingModel, setPricingModel] = useState('paid'); // 'free' | 'paid' | 'freemium'
+  const [price, setPrice] = useState('2500');
+  const [hasDiscount, setHasDiscount] = useState(true);
+  const [discountPrice, setDiscountPrice] = useState('1999');
+  const [premiumTier, setPremiumTier] = useState(true);
+  const [premiumSurcharge, setPremiumSurcharge] = useState('5000');
 
   const steps = [
     { num: 1, label: 'Course Details' },
@@ -316,121 +324,209 @@ export default function CourseBuilder() {
             <div className="flex flex-col xl:flex-row gap-16">
               {/* Left: Main Pricing Form (60%) */}
               <section className="xl:w-3/5 space-y-12">
-                {/* Basic Pricing */}
-                <div className="bg-surface-container-lowest p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-surface-variant space-y-10">
-                  <div className="flex items-center justify-between border-b border-surface-variant pb-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-primary/5 rounded-xl flex items-center justify-center text-primary">
-                        <span className="material-symbols-outlined">payments</span>
-                      </div>
-                      <h3 className="font-headline text-2xl font-bold text-primary">Course Economics</h3>
-                    </div>
-                    <span className="text-[10px] font-bold px-4 py-1.5 bg-secondary-fixed text-on-secondary-fixed rounded-full tracking-widest uppercase">Pricing Phase 01</span>
-                  </div>
-                  <div className="space-y-8">
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-end">
-                        <label className="block text-sm font-bold text-primary font-headline">Standard Course Price</label>
-                        <span className="text-[10px] text-slate-500 font-bold uppercase">Currency: KES (KSh)</span>
-                      </div>
-                      <div className="relative group">
-                        <div className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/40 font-bold text-xl group-focus-within:text-primary transition-colors">KSh</div>
-                        <input className="w-full pl-20 pr-8 py-6 bg-surface-container-low border-2 border-transparent focus:border-secondary-container focus:bg-surface-container-lowest rounded-3xl transition-all font-bold text-2xl text-primary placeholder-primary/10" placeholder="2,500" type="number" />
-                      </div>
-                      <p className="text-xs text-slate-500 px-2">Recommendation: KSh 1,500 - 3,500 for entry-level workshops.</p>
-                    </div>
-                    {/* Discount Toggle Section */}
-                    <div className="pt-10 border-t border-surface-variant">
-                      <div className="flex items-center justify-between mb-8">
-                        <div>
-                          <h4 className="font-headline font-bold text-primary text-lg">Limited-Time Discount</h4>
-                          <p className="text-sm text-slate-500">Attract early learners with a special launch price.</p>
-                        </div>
-                        <label className="relative inline-flex items-center cursor-pointer">
-                          <input defaultChecked className="sr-only peer" type="checkbox" value="" />
-                          <div className="w-14 h-7 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary-container"></div>
-                        </label>
-                      </div>
-                      <div className="grid md:grid-cols-2 gap-6 p-6 bg-surface-container-low rounded-3xl border border-surface-variant">
-                        <div className="space-y-3">
-                          <label className="block text-xs font-bold text-primary font-headline uppercase tracking-wider">Discounted Price (KSh)</label>
-                          <input className="w-full px-6 py-4 bg-surface-container-lowest border-2 border-transparent focus:border-secondary-container rounded-2xl transition-all font-bold text-lg text-primary" placeholder="1,999" type="number" />
-                        </div>
-                        <div className="space-y-3">
-                          <label className="block text-xs font-bold text-primary font-headline uppercase tracking-wider">Discount Reason</label>
-                          <div className="relative">
-                            <select className="w-full px-6 py-4 bg-surface-container-lowest border-2 border-transparent focus:border-secondary-container rounded-2xl transition-all font-bold text-primary appearance-none">
-                              <option>Launch Offer</option>
-                              <option>Seasonal Sale</option>
-                              <option>Community Discount</option>
-                              <option>Early Bird</option>
-                            </select>
-                            <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">expand_more</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                {/* SECTION 1 — PRICING MODEL SELECTOR */}
+                <div className="space-y-6">
+                   <div>
+                     <h3 className="font-headline font-bold text-[#002366] text-xl mb-1">How would you like to monetize this course?</h3>
+                     <p className="text-sm text-slate-500">Choose a pricing model that works for your audience.</p>
+                   </div>
+                   <div className="grid sm:grid-cols-3 gap-4">
+                     {/* Free Card */}
+                     <div onClick={() => setPricingModel('free')} className={`cursor-pointer p-6 rounded-2xl border-2 transition-all ${pricingModel === 'free' ? 'border-[#FFBF00] bg-surface-container-lowest shadow-xl' : 'border-surface-variant bg-surface-container-low hover:border-[#FFBF00]/50'}`}>
+                        <span className="material-symbols-outlined text-[#D48806] mb-3 text-3xl">volunteer_activism</span>
+                        <h4 className="font-headline font-bold text-[#002366] mb-2 text-lg">Free</h4>
+                        <p className="text-xs text-slate-500 leading-relaxed">Accessible to everyone. Great for lead generation.</p>
+                     </div>
+                     {/* Paid Card */}
+                     <div onClick={() => setPricingModel('paid')} className={`cursor-pointer p-6 rounded-2xl border-2 transition-all ${pricingModel === 'paid' ? 'border-[#FFBF00] bg-surface-container-lowest shadow-xl' : 'border-surface-variant bg-surface-container-low hover:border-[#FFBF00]/50'}`}>
+                        <span className="material-symbols-outlined text-[#002366] mb-3 text-3xl">payments</span>
+                        <h4 className="font-headline font-bold text-[#002366] mb-2 text-lg">Paid</h4>
+                        <p className="text-xs text-slate-500 leading-relaxed">Standard one-off payment for full course access.</p>
+                     </div>
+                     {/* Freemium Card */}
+                     <div onClick={() => setPricingModel('freemium')} className={`cursor-pointer p-6 rounded-2xl border-2 transition-all ${pricingModel === 'freemium' ? 'border-[#FFBF00] bg-surface-container-lowest shadow-xl' : 'border-surface-variant bg-surface-container-low hover:border-[#FFBF00]/50'}`}>
+                        <span className="material-symbols-outlined text-[#002366] mb-3 text-3xl">lock_open_right</span>
+                        <h4 className="font-headline font-bold text-[#002366] mb-2 text-lg">Freemium</h4>
+                        <p className="text-xs text-slate-500 leading-relaxed">Mix of free intro content and paid premium access.</p>
+                     </div>
+                   </div>
                 </div>
-                
-                {/* Enrollment Tiers */}
-                <div className="space-y-8">
-                  <div className="flex items-center gap-4 pl-2">
-                    <div className="w-2 h-8 bg-secondary-container rounded-full"></div>
-                    <h3 className="font-headline text-2xl font-bold text-primary">Value-Added Tiers</h3>
-                  </div>
-                  <div className="grid gap-6">
-                    {/* Standard Tier (Locked/Mandatory) */}
-                    <div className="bg-surface-container-lowest/60 p-8 rounded-3xl flex items-center justify-between border-2 border-dashed border-surface-variant">
-                      <div className="flex items-center gap-6">
-                        <div className="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-primary/40">
-                          <span className="material-symbols-outlined text-3xl">video_library</span>
+
+                {/* SECTION 2 — DYNAMIC PRICING FIELDS */}
+                {pricingModel !== 'free' ? (
+                  <div className="bg-surface-container-lowest p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-surface-variant space-y-10 animate-in fade-in zoom-in-95 duration-300">
+                    <div className="flex items-center justify-between border-b border-surface-variant pb-6">
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-primary/5 rounded-xl flex items-center justify-center text-primary">
+                          <span className="material-symbols-outlined">payments</span>
                         </div>
-                        <div>
-                          <h4 className="font-headline font-bold text-primary/60">Standard Tier</h4>
-                          <p className="text-sm text-slate-500 font-medium">Self-paced video access + PDF course notes</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Base Access</span>
-                        <span className="text-primary/40 font-bold font-headline">KSh 0.00 extra</span>
+                        <h3 className="font-headline text-2xl font-bold text-primary">Course Economics</h3>
                       </div>
                     </div>
-                    {/* Premium Tier Toggle */}
-                    <div className="bg-surface-container-lowest p-8 rounded-3xl border-2 border-secondary-container shadow-xl shadow-secondary-container/5 space-y-8 group transition-all hover:border-secondary">
-                      <div className="flex items-center justify-between">
+                    <div className="space-y-8">
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-end">
+                          <label className="block text-sm font-bold text-primary font-headline">Standard Course Price</label>
+                          <span className="text-[10px] text-slate-500 font-bold uppercase">Currency: KES (KSh)</span>
+                        </div>
+                        <div className="relative group">
+                          <div className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/40 font-bold text-xl group-focus-within:text-primary transition-colors">KSh</div>
+                          <input 
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            className="w-full pl-20 pr-8 py-6 bg-surface-container-low border-2 border-transparent focus:border-secondary-container focus:bg-surface-container-lowest rounded-3xl transition-all font-bold text-2xl text-primary placeholder-primary/10" 
+                            placeholder="2,500" 
+                            type="number" 
+                          />
+                        </div>
+                        <p className="text-xs text-slate-500 px-2">Recommendation: KSh 1,500 - 3,500 for entry-level courses.</p>
+                      </div>
+                      {/* Discount Toggle Section */}
+                      <div className="pt-10 border-t border-surface-variant">
+                        <div className="flex items-center justify-between mb-8">
+                          <div>
+                            <h4 className="font-headline font-bold text-primary text-lg">Limited-Time Discount</h4>
+                            <p className="text-sm text-slate-500">Attract early learners with a special launch price.</p>
+                          </div>
+                          <label className="relative inline-flex items-center cursor-pointer">
+                            <input 
+                              checked={hasDiscount} 
+                              onChange={() => setHasDiscount(!hasDiscount)}
+                              className="sr-only peer" 
+                              type="checkbox" 
+                            />
+                            <div className="w-14 h-7 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary-container"></div>
+                          </label>
+                        </div>
+                        {hasDiscount && (
+                          <div className="grid md:grid-cols-2 gap-6 p-6 bg-surface-container-low rounded-3xl border border-surface-variant animate-in fade-in slide-in-from-top-2 duration-300">
+                            <div className="space-y-3">
+                              <label className="block text-xs font-bold text-primary font-headline uppercase tracking-wider">Discounted Price (KSh)</label>
+                              <input 
+                                value={discountPrice}
+                                onChange={(e) => setDiscountPrice(e.target.value)}
+                                className="w-full px-6 py-4 bg-surface-container-lowest border-2 border-transparent focus:border-secondary-container rounded-2xl transition-all font-bold text-lg text-primary" 
+                                placeholder="1,999" 
+                                type="number" 
+                              />
+                            </div>
+                            <div className="space-y-3">
+                              <label className="block text-xs font-bold text-primary font-headline uppercase tracking-wider">Discount Reason</label>
+                              <div className="relative">
+                                <select className="w-full px-6 py-4 bg-surface-container-lowest border-2 border-transparent focus:border-secondary-container rounded-2xl transition-all font-bold text-primary appearance-none">
+                                  <option>Launch Offer</option>
+                                  <option>Seasonal Sale</option>
+                                  <option>Community Discount</option>
+                                  <option>Early Bird</option>
+                                </select>
+                                <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">expand_more</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-[#F7F4EF] p-8 rounded-3xl border-2 border-[#FFBF00] space-y-4 animate-in fade-in zoom-in-95 duration-300">
+                    <h4 className="font-headline font-bold text-[#002366] text-xl flex items-center gap-3">
+                      <span className="material-symbols-outlined text-[#D48806]">volunteer_activism</span>
+                      Building a Community
+                    </h4>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      Free courses are an excellent way to generate leads, build an engaged student base, and upsell premium courses in the future. Once learners experience your value, they're much more likely to pay for advanced content.
+                    </p>
+                  </div>
+                )}
+                
+                {/* SECTION 3 — ENROLLMENT TIERS */}
+                {pricingModel !== 'free' && (
+                  <div className="space-y-8 animate-in fade-in duration-300 delay-150">
+                    <div className="flex items-center gap-4 pl-2">
+                      <div className="w-2 h-8 bg-secondary-container rounded-full"></div>
+                      <h3 className="font-headline text-2xl font-bold text-primary">Value-Added Tiers</h3>
+                    </div>
+                    <div className="grid gap-6">
+                      {/* Standard Tier (Locked/Mandatory) */}
+                      <div className="bg-surface-container-lowest/60 p-8 rounded-3xl flex items-center justify-between border-2 border-dashed border-surface-variant">
                         <div className="flex items-center gap-6">
-                          <div className="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shadow-inner">
-                            <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
+                          <div className="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-primary/40">
+                            <span className="material-symbols-outlined text-3xl">video_library</span>
                           </div>
                           <div>
-                            <div className="flex items-center gap-3">
-                              <h4 className="font-headline font-bold text-primary text-xl tracking-tight">Premium Mentor Tier</h4>
-                              <span className="text-[10px] bg-secondary-container text-on-secondary-container font-bold px-2 py-0.5 rounded uppercase tracking-tighter">Most Popular</span>
-                            </div>
-                            <p className="text-sm text-slate-500 font-medium mt-1">Certificate of Completion + 1-on-1 Mentor Support</p>
+                            <h4 className="font-headline font-bold text-primary/60">Standard Tier</h4>
+                            <p className="text-sm text-slate-500 font-medium">Self-paced video access + PDF course notes</p>
                           </div>
                         </div>
-                        <label className="relative inline-flex items-center cursor-pointer">
-                          <input defaultChecked className="sr-only peer" type="checkbox" value="" />
-                          <div className="w-14 h-7 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary"></div>
-                        </label>
+                        <div className="text-right">
+                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Base Access</span>
+                          <span className="text-primary/40 font-bold font-headline">KSh 0.00 extra</span>
+                        </div>
                       </div>
-                      <div className="bg-surface p-6 rounded-2xl space-y-6">
-                        <div className="flex items-start gap-3">
-                          <span className="material-symbols-outlined text-secondary text-sm mt-0.5">info</span>
-                          <p className="text-sm text-slate-500 leading-relaxed">Setting a premium tier increases conversion by providing a high-value option for serious students who value certification and direct feedback.</p>
-                        </div>
-                        <div className="space-y-3">
-                          <label className="block text-xs font-bold text-primary font-headline uppercase tracking-wider">Additional Premium Surcharge (KSh)</label>
-                          <div className="relative max-w-xs">
-                            <span className="absolute left-6 top-1/2 -translate-y-1/2 text-secondary font-bold text-lg">+ KSh</span>
-                            <input className="w-full pl-24 pr-6 py-5 bg-surface-container-lowest border-2 border-secondary-container/30 focus:border-secondary rounded-2xl transition-all font-bold text-xl text-primary" placeholder="5,000" type="number" />
+                      {/* Premium Tier Toggle */}
+                      <div className="bg-surface-container-lowest p-8 rounded-3xl border-2 border-secondary-container shadow-xl shadow-secondary-container/5 space-y-8 group transition-all hover:border-secondary">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-6">
+                            <div className="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shadow-inner">
+                              <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-3">
+                                <h4 className="font-headline font-bold text-primary text-xl tracking-tight">Premium Mentor Tier</h4>
+                                <span className="text-[10px] bg-secondary-container text-on-secondary-container font-bold px-2 py-0.5 rounded uppercase tracking-tighter">Optional</span>
+                              </div>
+                              <p className="text-sm text-slate-500 font-medium mt-1">Certificate of Completion + 1-on-1 Mentor Support</p>
+                            </div>
                           </div>
-                          <p className="text-[10px] text-slate-500 font-medium italic">This amount is added to the standard price. Total Premium Price: <span className="text-secondary font-bold">KSh 6,999</span></p>
+                          <label className="relative inline-flex items-center cursor-pointer">
+                            <input 
+                              checked={premiumTier}
+                              onChange={() => setPremiumTier(!premiumTier)}
+                              className="sr-only peer" 
+                              type="checkbox" 
+                            />
+                            <div className="w-14 h-7 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary"></div>
+                          </label>
                         </div>
+                        {premiumTier && (
+                          <div className="bg-surface p-6 rounded-2xl space-y-6 animate-in slide-in-from-top-4 fade-in duration-300">
+                            <div className="flex items-start gap-3">
+                              <span className="material-symbols-outlined text-secondary text-sm mt-0.5">info</span>
+                              <p className="text-sm text-slate-500 leading-relaxed">Setting a premium tier increases conversion by providing a high-value option for serious students who value certification and direct feedback.</p>
+                            </div>
+                            <div className="space-y-3">
+                              <label className="block text-xs font-bold text-primary font-headline uppercase tracking-wider">Additional Premium Surcharge (KSh)</label>
+                              <div className="relative max-w-xs">
+                                <span className="absolute left-6 top-1/2 -translate-y-1/2 text-secondary font-bold text-lg">+ KSh</span>
+                                <input 
+                                  value={premiumSurcharge}
+                                  onChange={(e) => setPremiumSurcharge(e.target.value)}
+                                  className="w-full pl-24 pr-6 py-5 bg-surface-container-lowest border-2 border-secondary-container/30 focus:border-secondary rounded-2xl transition-all font-bold text-xl text-primary" 
+                                  placeholder="5,000" 
+                                  type="number" 
+                                />
+                              </div>
+                              <p className="text-[10px] text-slate-500 font-medium italic">This amount is added to the standard price.</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
+                  </div>
+                )}
+
+                {/* Transparent Commission Info Card */}
+                <div className="bg-[#002366]/5 rounded-3xl p-6 border border-[#002366]/10 flex items-start gap-4 mt-8 animate-in fade-in duration-300">
+                  <div className="w-10 h-10 rounded-full bg-[#002366]/10 flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-[#002366] text-xl">account_balance</span>
+                  </div>
+                  <div>
+                    <h4 className="font-headline font-bold text-[#002366] mb-1">SkillZone Commission Transparency</h4>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {pricingModel === 'free' 
+                          ? "Since this course is free, there is no commission. If you eventually add paid tiers or premium coaching, a platform fee will apply to those purchases."
+                          : "SkillZone Africa takes a flat 15% marketplace commission on every paid enrollment. This covers payment gateways, video hosting, and global marketing to bring learners to you."}
+                    </p>
                   </div>
                 </div>
               </section>
@@ -515,11 +611,31 @@ export default function CourseBuilder() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <span className="block text-[10px] text-slate-400 font-bold line-through tracking-tighter">KSh 2,500</span>
-                          <div className="flex items-baseline justify-end gap-1">
-                            <span className="text-xs font-bold text-secondary uppercase">KSh</span>
-                            <span className="text-3xl font-headline font-extrabold text-secondary tracking-tight">1,999</span>
-                          </div>
+                          {pricingModel === 'free' ? (
+                            <div className="flex items-baseline justify-end gap-1">
+                              <span className="text-3xl font-headline font-extrabold text-[#D48806] tracking-tight uppercase">Free</span>
+                            </div>
+                          ) : pricingModel === 'freemium' ? (
+                            <>
+                              <div className="flex items-baseline justify-end gap-1">
+                                <span className="text-xs font-bold text-[#D48806] uppercase">Free Intro /</span>
+                              </div>
+                              <div className="flex items-baseline justify-end gap-1">
+                                <span className="text-sm font-bold text-[#D48806] uppercase">KSh</span>
+                                <span className="text-2xl font-headline font-extrabold text-[#D48806] tracking-tight">{hasDiscount && discountPrice ? Number(discountPrice).toLocaleString() : Number(price || 0).toLocaleString()}</span>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              {hasDiscount && discountPrice && (
+                                <span className="block text-[10px] text-slate-400 font-bold line-through tracking-tighter">KSh {Number(price || 0).toLocaleString()}</span>
+                              )}
+                              <div className="flex items-baseline justify-end gap-1">
+                                <span className="text-xs font-bold text-secondary uppercase">KSh</span>
+                                <span className="text-3xl font-headline font-extrabold text-secondary tracking-tight">{hasDiscount && discountPrice ? Number(discountPrice).toLocaleString() : Number(price || 0).toLocaleString()}</span>
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -717,12 +833,17 @@ export default function CourseBuilder() {
             <span>Back</span>
           </button>
           {currentStep < 4 ? (
-            <button 
-              onClick={handleNext}
-              className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all ml-auto"
-            >
-              Save & Continue
-            </button>
+            <div className="flex flex-col items-center sm:items-end w-full md:w-auto ml-auto gap-2 mt-4 md:mt-0">
+              {currentStep === 3 && (
+                <span className="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-widest">Pricing can be updated anytime</span>
+              )}
+              <button 
+                onClick={handleNext}
+                className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all"
+              >
+                Save & Continue
+              </button>
+            </div>
           ) : (
             <button 
               onClick={() => navigate('/course-published-success')}
