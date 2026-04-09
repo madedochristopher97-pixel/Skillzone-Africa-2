@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Wallet, ArrowDown, Landmark, TrendingUp, CreditCard, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -22,6 +23,7 @@ const itemVariants = {
 };
 
 export default function InstructorEarnings() {
+  const navigate = useNavigate();
   return (
     <motion.div 
       variants={containerVariants}
@@ -34,7 +36,7 @@ export default function InstructorEarnings() {
           <h1 className="font-headline font-black text-3xl text-[#00113a]">Financial Overview</h1>
           <p className="text-slate-500 mt-1 font-medium">Track your revenue, payouts, and pending transactions.</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 border-2 border-[#00113a] text-[#00113a] rounded-xl font-headline font-bold text-sm hover:bg-[#00113a]/5 transition-all">
+        <button onClick={() => navigate('/instructor-dashboard/settings')} className="flex items-center gap-2 px-6 py-3 border-2 border-[#00113a] text-[#00113a] rounded-xl font-headline font-bold text-sm hover:bg-[#00113a]/5 transition-all">
           <Landmark size={18} strokeWidth={2} />
           Settlement Settings
         </button>

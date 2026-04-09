@@ -93,10 +93,16 @@ export default function InstructorStudents() {
                 </td>
                 <td className="p-6 text-right">
                   <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
-                    <button className="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all shadow-sm">
+                    <button 
+                      onClick={() => window.location.href = `mailto:${student.email}`}
+                      title="Send Email"
+                      className="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all shadow-sm">
                       <Mail size={16} />
                     </button>
-                    <button className="p-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-600 hover:text-white transition-all shadow-sm">
+                    <button 
+                      onClick={() => alert(`Starting a chat with ${student.name}... (Messaging feature coming soon)`)}
+                      title="Send Message"
+                      className="p-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-600 hover:text-white transition-all shadow-sm">
                       <MessageSquare size={16} />
                     </button>
                     <button className="p-2 text-slate-400 hover:text-slate-600 transition-colors">

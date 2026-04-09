@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Plus, BookOpen, Users, MoreVertical, Star, TrendingUp, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -22,6 +23,7 @@ const itemVariants = {
 };
 
 export default function InstructorCourses() {
+  const navigate = useNavigate();
   return (
     <motion.div 
       variants={containerVariants}
@@ -34,7 +36,7 @@ export default function InstructorCourses() {
           <h1 className="font-headline font-black text-3xl text-[#00113a]">My Courses</h1>
           <p className="text-slate-500 mt-1 font-medium">Manage your curriculum and track course-specific performance.</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-headline font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/20 group">
+        <button onClick={() => navigate('/instructor-dashboard/course-builder')} className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-headline font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/20 group">
           <Plus size={18} strokeWidth={3} className="group-hover:rotate-90 transition-transform" />
           Create New Course
         </button>
@@ -95,7 +97,7 @@ export default function InstructorCourses() {
 
         {/* Empty placeholder to encourage creation */}
         <motion.div 
-          onClick={() => {}}
+          onClick={() => navigate('/instructor-dashboard/course-builder')}
           variants={itemVariants}
           className="border-2 border-dashed border-slate-200 rounded-[2.5rem] flex flex-col items-center justify-center p-8 bg-slate-50/50 hover:bg-white hover:border-primary/50 transition-all cursor-pointer group"
         >

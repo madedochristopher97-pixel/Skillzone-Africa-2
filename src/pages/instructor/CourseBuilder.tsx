@@ -5,6 +5,7 @@ export default function CourseBuilder() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [difficulty, setDifficulty] = useState('Beginner');
+  const [isAllLevelsFriendly, setIsAllLevelsFriendly] = useState(false);
   const [visibility, setVisibility] = useState('public');
   const [publishImmediately, setPublishImmediately] = useState(true);
 
@@ -120,6 +121,23 @@ export default function CourseBuilder() {
                         {level}
                       </button>
                     ))}
+                  </div>
+
+                  {/* All Levels Friendly Toggle */}
+                  <div className="pt-4 flex items-center justify-between">
+                    <div>
+                      <h4 className="font-headline font-bold text-primary text-sm tracking-tight">All Levels Friendly</h4>
+                      <p className="text-xs text-slate-500 mt-1">Suitable for students with no prior experience.</p>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input 
+                        checked={isAllLevelsFriendly}
+                        onChange={(e) => setIsAllLevelsFriendly(e.target.checked)}
+                        className="sr-only peer" 
+                        type="checkbox" 
+                      />
+                      <div className="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary-fixed"></div>
+                    </label>
                   </div>
                 </div>
               </div>
@@ -533,7 +551,7 @@ export default function CourseBuilder() {
         {currentStep === 4 && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
             <header className="mb-12">
-              <h1 className="text-4xl md:text-5xl font-black text-primary-container leading-tight tracking-tight">Ready to Share Your Knowledge?</h1>
+              <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary-container leading-tight tracking-tight">Ready to Share Your Knowledge?</h1>
               <p className="text-on-surface-variant mt-4 text-lg max-w-2xl">Review your course details one last time before making it live to students across Africa.</p>
             </header>
             
