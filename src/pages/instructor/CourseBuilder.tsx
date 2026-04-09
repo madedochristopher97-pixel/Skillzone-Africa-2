@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function CourseBuilder() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
-  const [difficulty, setDifficulty] = useState('Beginner');
-  const [isAllLevelsFriendly, setIsAllLevelsFriendly] = useState(false);
+  const [difficulty, setDifficulty] = useState('All Levels');
   const [visibility, setVisibility] = useState('public');
   const [publishImmediately, setPublishImmediately] = useState(true);
 
@@ -107,37 +106,20 @@ export default function CourseBuilder() {
                 {/* Difficulty Toggle */}
                 <div className="space-y-3">
                   <label className="block font-headline font-bold text-primary text-sm tracking-tight uppercase">Difficulty Level</label>
-                  <div className="flex p-1 bg-surface-container-low rounded-xl">
-                    {['Beginner', 'Intermediate', 'Advanced'].map((level) => (
+                  <div className="flex p-1 bg-surface-container-low rounded-xl flex-wrap xl:flex-nowrap">
+                    {['All Levels', 'Beginner', 'Intermediate', 'Advanced'].map((level) => (
                       <button 
                         key={level}
                         onClick={() => setDifficulty(level)}
-                        className={`flex-1 py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest transition-all ${
+                        className={`flex-1 py-3 px-2 rounded-lg font-bold text-[10px] sm:text-xs uppercase tracking-tight sm:tracking-widest transition-all ${
                           difficulty === level 
-                            ? 'bg-secondary-fixed text-on-secondary-fixed' 
+                            ? 'bg-secondary-fixed text-on-secondary-fixed shadow-sm' 
                             : 'text-primary hover:bg-surface-container-highest/50'
                         }`}
                       >
                         {level}
                       </button>
                     ))}
-                  </div>
-
-                  {/* All Levels Friendly Toggle */}
-                  <div className="pt-4 flex items-center justify-between">
-                    <div>
-                      <h4 className="font-headline font-bold text-primary text-sm tracking-tight">All Levels Friendly</h4>
-                      <p className="text-xs text-slate-500 mt-1">Suitable for students with no prior experience.</p>
-                    </div>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        checked={isAllLevelsFriendly}
-                        onChange={(e) => setIsAllLevelsFriendly(e.target.checked)}
-                        className="sr-only peer" 
-                        type="checkbox" 
-                      />
-                      <div className="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary-fixed"></div>
-                    </label>
                   </div>
                 </div>
               </div>

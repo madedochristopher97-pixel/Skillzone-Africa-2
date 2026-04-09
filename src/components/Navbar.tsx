@@ -52,7 +52,7 @@ export default function Navbar() {
                     {CATEGORIES.map((category) => (
                       <Link 
                         key={category.id} 
-                        to={`/category/${category.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} 
+                        to={`/categories/${category.name.toLowerCase().replace(/\s+/g, '-')}`} 
                         className="font-body text-[1.05rem] font-semibold text-[#00113a] hover:text-[#ffbf00] transition-colors block"
                       >
                         {category.name}
