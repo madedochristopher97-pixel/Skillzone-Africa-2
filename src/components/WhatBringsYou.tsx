@@ -20,6 +20,13 @@ export default function WhatBringsYou() {
     }
   };
 
+  const handleIntentClick = (id: string) => {
+    setSelectedIntent(id);
+    if (window.innerWidth < 640) {
+      navigate(`/onboarding?intent=${id}`);
+    }
+  };
+
   return (
     <section id="what-brings-you" className="py-24 bg-[#eef6ff]">
       <div className="max-w-7xl mx-auto px-8 text-center">
@@ -32,7 +39,7 @@ export default function WhatBringsYou() {
             return (
               <div 
                 key={intent.id}
-                onClick={() => setSelectedIntent(intent.id)}
+                onClick={() => handleIntentClick(intent.id)}
                 className={`relative p-10 rounded-3xl transition-all duration-150 flex flex-col items-center group cursor-pointer
                   ${isSelected 
                     ? 'bg-[#EEF1F8] border-2 border-[#FFBF00] shadow-md' 
