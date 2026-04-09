@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -13,7 +13,9 @@ import {
   Bell,
   HelpCircle,
   X,
-  Check
+  Check,
+  User,
+  LogOut
 } from 'lucide-react';
 
 export default function InstructorDashboard() {
@@ -23,6 +25,8 @@ export default function InstructorDashboard() {
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [helpQuery, setHelpQuery] = useState('');
   const [helpSubmitted, setHelpSubmitted] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const navigate = useNavigate();
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) => 
     `flex items-center gap-3 py-3 font-headline font-medium text-sm tracking-tight transition-all duration-200 ${
@@ -146,14 +150,42 @@ export default function InstructorDashboard() {
               
               <div className="h-8 w-[1px] bg-slate-200 mx-2"></div>
               
-              <div className="flex items-center gap-3 pl-2">
+              <div className="flex items-center gap-3 pl-2 relative">
                 <div className="text-right hidden sm:block">
                   <p className="text-xs font-bold font-headline text-[#002366]">Fredrick O.</p>
                   <p className="text-[10px] text-slate-500 font-medium">Pro Instructor</p>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-headline font-bold">
+                <button 
+                  onClick={() => setShowProfileMenu(!showProfileMenu)}
+                  className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-headline font-bold hover:bg-primary/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/20"
+                >
                   FO
-                </div>
+                </button>
+                
+                {showProfileMenu && (
+                  <div className="absolute right-0 top-12 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <button 
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        navigate('/instructor-dashboard/settings');
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-xl transition-colors text-left"
+                    >
+                      <Settings size={16} />
+                      Settings
+                    </button>
+                    <button 
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        navigate('/');
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-xl transition-colors text-left"
+                    >
+                      <LogOut size={16} />
+                      Sign Out
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </header>

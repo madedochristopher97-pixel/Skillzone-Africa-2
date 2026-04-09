@@ -1,4 +1,5 @@
 import React from 'react';
+import { Building2, PlusCircle, CreditCard } from 'lucide-react';
 
 export default function InstructorSettings() {
   return (
@@ -61,7 +62,42 @@ export default function InstructorSettings() {
           </div>
         </div>
 
-        <div className="flex justify-end gap-4 pt-4">
+        <hr className="border-surface-variant" />
+
+        <div>
+           <h3 className="font-headline font-bold text-lg text-primary mb-4 flex items-center gap-2">
+             <CreditCard size={20} />
+             Payment Method
+           </h3>
+           <p className="text-sm text-slate-500 mb-6">Configure how you want to receive your course earnings.</p>
+           <div className="space-y-4">
+              <div className="bg-surface-container-low p-6 rounded-2xl border border-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-secondary/10 text-secondary rounded-full flex items-center justify-center shrink-0">
+                    <Building2 size={24} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h4 className="font-bold text-primary text-sm font-headline">Bank Transfer</h4>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-green-100 text-green-700 rounded-full tracking-wider uppercase">Default</span>
+                    </div>
+                    <p className="text-sm font-bold text-slate-700 mt-1">Equity Bank Kenya</p>
+                    <p className="text-xs text-slate-500">Account ending in 1234</p>
+                  </div>
+                </div>
+                <button className="bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl font-bold text-xs hover:bg-slate-50 hover:text-primary transition-colors focus:ring-2 focus:ring-primary/20">
+                  Edit Details
+                </button>
+              </div>
+              
+              <button className="w-full py-4 border-2 border-dashed border-slate-300 rounded-2xl text-primary font-bold text-sm flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+                <PlusCircle size={18} />
+                Add New Payment Method
+              </button>
+           </div>
+        </div>
+
+        <div className="flex justify-end gap-4 pt-4 border-t border-surface-variant mt-8">
           <button className="px-6 py-3 text-primary font-bold text-sm hover:bg-surface-container-low rounded-xl transition-colors">
             Cancel
           </button>
