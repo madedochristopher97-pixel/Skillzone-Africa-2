@@ -1,5 +1,5 @@
 import { COURSES } from '../constants';
-import { Star, ArrowRight, Users, Clock, Bookmark } from 'lucide-react';
+import { Star, ArrowRight, Users, Clock, Bookmark, BadgeCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -44,9 +44,7 @@ export default function RecommendedCourses() {
                 <div className="flex items-center gap-3 mb-6">
                   <img alt={featured.instructor.name} className="w-10 h-10 rounded-full border-2 border-[#ffbf00] object-cover" src={featured.instructor.avatar} referrerPolicy="no-referrer" />
                   <span className="text-white font-bold opacity-90">{featured.instructor.name}</span>
-                  <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
-                    check
-                  </span>
+                  <BadgeCheck size={14} className="text-[#2e7d32] shrink-0" fill="currentColor" color="white" />
                 </div>
                 <h3 className="font-headline font-black text-3xl md:text-4xl text-white mb-4 leading-tight tracking-tight">{featured.title}</h3>
                 
@@ -119,9 +117,7 @@ export default function RecommendedCourses() {
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-1.5 flex-1 min-w-0">
                       <span className="text-xs font-bold text-[#757682] truncate">{course.instructor.name}</span>
-                      <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
-                        check
-                      </span>
+                      <BadgeCheck size={14} className="text-[#2e7d32] shrink-0" fill="currentColor" color="white" />
                     </div>
                     <div className="flex items-center gap-1 shrink-0">
                       <Star className="text-[#444650] fill-current" size={12} />
@@ -201,9 +197,7 @@ export default function RecommendedCourses() {
                     <div className="flex items-center gap-3 flex-1">
                       <img alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover border-2 border-[#ffbf00]/20" src={course.instructor.avatar} referrerPolicy="no-referrer" />
                       <span className="text-sm font-bold text-[#757682]">{course.instructor.name}</span>
-                      <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
-                        check
-                      </span>
+                      <BadgeCheck size={14} className="text-[#2e7d32] shrink-0" fill="currentColor" color="white" />
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">
                       <Star className="text-[#444650] fill-current" size={16} />

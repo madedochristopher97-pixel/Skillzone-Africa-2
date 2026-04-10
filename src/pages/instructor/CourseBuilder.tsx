@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 
 export default function CourseBuilder() {
   const navigate = useNavigate();
@@ -8,6 +9,24 @@ export default function CourseBuilder() {
   const [visibility, setVisibility] = useState('public');
   const [publishImmediately, setPublishImmediately] = useState(true);
   
+  // Tags State
+  const [tools, setTools] = useState<string[]>(['Figma', 'React']);
+  const [toolInput, setToolInput] = useState('');
+
+  const handleAddTool = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && toolInput.trim() !== '') {
+      e.preventDefault();
+      if (!tools.includes(toolInput.trim())) {
+        setTools([...tools, toolInput.trim()]);
+      }
+      setToolInput('');
+    }
+  };
+
+  const removeTool = (toolToRemove: string) => {
+    setTools(tools.filter(t => t !== toolToRemove));
+  };
+
   // Pricing States
   const [pricingModel, setPricingModel] = useState('paid'); // 'free' | 'paid' | 'freemium'
   const [price, setPrice] = useState('2500');
@@ -129,6 +148,29 @@ export default function CourseBuilder() {
                       </button>
                     ))}
                   </div>
+                </div>
+              </div>
+
+              {/* Tools & Software Tags */}
+              <div className="space-y-3">
+                <label className="block font-headline font-bold text-primary text-sm tracking-tight uppercase">Tools & Software <span className="text-slate-400 capitalize font-normal tracking-normal">(Optional)</span></label>
+                <div className="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus-within:border-secondary focus-within:bg-surface-container-lowest transition-all p-3 flex flex-wrap gap-2 items-center">
+                  {tools.map((tool) => (
+                    <span key={tool} className="flex items-center gap-1.5 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-sm font-bold">
+                      {tool}
+                      <button onClick={() => removeTool(tool)} className="hover:text-red-500 transition-colors">
+                        <X size={14} />
+                      </button>
+                    </span>
+                  ))}
+                  <input 
+                    className="flex-1 bg-transparent border-none focus:ring-0 p-1 min-w-[200px] text-primary placeholder:text-slate-400 font-medium" 
+                    placeholder="Type a tool name and press Enter (e.g. Photoshop)" 
+                    type="text"
+                    value={toolInput}
+                    onChange={(e) => setToolInput(e.target.value)}
+                    onKeyDown={handleAddTool}
+                  />
                 </div>
               </div>
               
