@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Star, Bookmark, Users, Clock } from 'lucide-react';
+import { Star, Bookmark, Users, Clock, BadgeCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Course } from '../types';
@@ -59,9 +59,7 @@ export default function CourseCard({ course, className = "" }: CourseCardProps) 
           <div className="flex items-center justify-between gap-2 mb-3">
             <div className="flex items-center gap-1.5 flex-1 min-w-0">
               <span className="text-sm font-medium text-[#444650] truncate">{course.instructor.name}</span>
-              <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
-                check
-              </span>
+              <BadgeCheck size={14} className="text-[#2e7d32] shrink-0" fill="currentColor" color="white" />
             </div>
             <div className="flex items-center gap-1 shrink-0">
               <Star className="text-[#444650] fill-current" size={14} />
