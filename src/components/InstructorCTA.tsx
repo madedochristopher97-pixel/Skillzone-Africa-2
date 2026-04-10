@@ -4,6 +4,7 @@ export default function InstructorCTA() {
   return (
     <section className="px-8 pb-24 bg-[#fcf9f4]">
       <div className="max-w-7xl mx-auto rounded-[3.5rem] bg-[#00113a] overflow-hidden relative shadow-2xl">
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('/Patterns.jfif')] bg-repeat bg-[length:300px] mix-blend-plus-lighter pointer-events-none z-0"></div>
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#ffbf00] to-transparent"></div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
           <div className="p-12 md:p-20 z-10 space-y-8 self-center">

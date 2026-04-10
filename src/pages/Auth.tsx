@@ -248,6 +248,8 @@ export default function Auth() {
 
       {/* Right Side: Brand Marketing (45%) */}
       <section className="w-full md:w-[45%] bg-[#002366] relative flex items-center justify-center px-8 md:px-12 py-20 overflow-hidden">
+        {/* Pattern Background */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('/Patterns.jfif')] bg-repeat bg-[length:300px] mix-blend-plus-lighter pointer-events-none z-0"></div>
         {/* Decorative Elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#795900] opacity-10 rounded-full blur-3xl -mr-20 -mt-20"></div>
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#00113a] opacity-30 rounded-full blur-3xl -ml-40 -mb-40"></div>

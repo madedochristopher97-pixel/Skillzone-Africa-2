@@ -534,7 +534,8 @@ export default function InstructorOnboarding() {
         {/* Right Column: Visual Side (45%) */}
         <section className="hidden md:flex md:w-[45%] bg-[#002366] relative flex-col justify-end p-16 overflow-hidden">
           {/* Background Elements */}
-          <div className="absolute inset-0 opacity-10 mix-blend-overlay">
+          <div className="absolute inset-0 opacity-[0.03] bg-[url('/Patterns.jfif')] bg-repeat bg-[length:300px] mix-blend-plus-lighter pointer-events-none z-0"></div>
+          <div className="absolute inset-0 opacity-10 mix-blend-overlay z-0">
             <div className="absolute top-[-10%] left-[-10%] w-full h-full rounded-full bg-[#795900] blur-[120px]"></div>
             <div className="absolute bottom-[-20%] right-[-10%] w-[80%] h-[80%] rounded-full bg-white blur-[150px]"></div>
           </div>

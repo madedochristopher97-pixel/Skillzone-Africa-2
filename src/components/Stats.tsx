@@ -7,8 +7,9 @@ export default function Stats() {
   ];
 
   return (
-    <section className="bg-[#00113a] py-16 px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section className="relative bg-[#00113a] py-16 px-8 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03] bg-[url('/Patterns.jfif')] bg-repeat bg-[length:300px] mix-blend-plus-lighter pointer-events-none"></div>
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
         {stats.map((stat, index) => (
           <div key={index} className="text-center">
             <div className="font-headline font-black text-4xl text-[#ffbf00] mb-2">{stat.value}</div>

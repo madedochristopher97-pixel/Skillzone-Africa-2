@@ -4,19 +4,19 @@ import { Mail } from 'lucide-react';
 export default function ApplicationSubmitted() {
   return (
     <div className="bg-[#fcf9f4] font-body text-[#1c1c19] min-h-screen flex flex-col">
-      {/* Top Navigation Anchor - Suppressed based on transactional intent, only rendering logo bar */}
-      <header className="w-full bg-[#fcf9f4] dark:bg-slate-950">
-        <div className="flex justify-between items-center w-full px-6 py-6 max-w-7xl mx-auto">
-          <img src="https://drive.google.com/thumbnail?id=11ee_UL2J5eym9KSOjW98ttpk78O11E4Z&sz=w500" alt="SkillsZone Africa" className="h-8 object-contain" referrerPolicy="no-referrer" />
+      {/* Top Navigation Anchor */}
+      <header className="w-full bg-[#002366] py-4">
+        <div className="flex justify-between items-center w-full px-6 max-w-7xl mx-auto">
+          <img src="/Logo 2@2x.png" alt="SkillsZone Africa" className="h-8 object-contain" />
         </div>
       </header>
       
-      <main className="flex-grow flex items-center justify-center px-4">
+      <main className="flex-grow flex items-center justify-center px-4 py-16">
         {/* Main Confirmation Canvas */}
         <div className="max-w-md w-full">
           {/* Asymmetrical Layout Element: Floating Badge */}
-          <div className="mb-6 flex justify-start -ml-4">
-            <div className="bg-[#ffdfa0] text-[#261a00] px-4 py-1 rounded-full text-xs font-bold font-headline tracking-widest uppercase">
+          <div className="mb-6 flex justify-center md:justify-start">
+            <div className="bg-[#ffcf5c] text-[#261a00] px-4 py-1 rounded-full text-xs font-bold font-headline tracking-widest uppercase shadow-sm">
               Instructor Portal
             </div>
           </div>
