@@ -1,15 +1,23 @@
 import { PlayCircle, Award, BookOpen, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { DURATIONS, EASINGS } from '../../constants/animations';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { COURSES } from '../../constants';
 import CourseCard from '../../components/CourseCard';
 
 export default function LearnerDashboardOverview() {
-  const [activeTab, setActiveTab] = useState<'All Courses' | 'In Progress' | 'Completed' | 'Saved Bookmarks'>('All Courses');
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState<'All Courses' | 'In Progress' | 'Completed' | 'Bookmarked Courses'>('All Courses');
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   const shouldReduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('tab') === 'bookmarks') {
+      setActiveTab('Bookmarked Courses');
+    }
+  }, [location.search]);
 
   const container = {
     hidden: { opacity: 0 },
@@ -144,7 +152,7 @@ export default function LearnerDashboardOverview() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
           <h2 className="font-headline text-2xl font-bold text-[#00113a] shrink-0">My Courses</h2>
           <div className="flex gap-4 sm:gap-6 text-sm font-semibold overflow-x-auto pb-2 scrollbar-hide">
-            {(['All Courses', 'In Progress', 'Completed', 'Saved Bookmarks'] as const).map(tab => (
+            {(['All Courses', 'In Progress', 'Completed', 'Bookmarked Courses'] as const).map(tab => (
               <button 
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -157,7 +165,7 @@ export default function LearnerDashboardOverview() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {activeTab === 'Saved Bookmarks' ? (
+          {activeTab === 'Bookmarked Courses' ? (
             COURSES.slice(0, 4).map(course => (
               <CourseCard key={course.id} course={course} />
             ))

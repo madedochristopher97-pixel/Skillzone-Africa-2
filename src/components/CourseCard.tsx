@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Star, Bookmark, Users, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useState } from 'react';
 import { Course } from '../types';
 
 interface CourseCardProps {
@@ -9,6 +10,7 @@ interface CourseCardProps {
 }
 
 export default function CourseCard({ course, className = "" }: CourseCardProps) {
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const isAny = course.level === 'Any level';
   const isBeginner = isAny || course.level === 'Beginner';
   const isIntermediate = isAny || course.level === 'Intermediate';
@@ -41,6 +43,15 @@ export default function CourseCard({ course, className = "" }: CourseCardProps) 
               {course.tag}
             </div>
           )}
+          <button 
+            className={`absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center transition-colors shadow-sm ${isBookmarked ? 'text-[#00113a]' : 'text-[#444650] hover:text-[#00113a]'}`}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsBookmarked(!isBookmarked);
+            }}
+          >
+            <Bookmark size={16} fill={isBookmarked ? 'currentColor' : 'none'} />
+          </button>
         </div>
 
         <div className="p-6 flex flex-col flex-1">
@@ -103,16 +114,6 @@ export default function CourseCard({ course, className = "" }: CourseCardProps) 
                 <span className="text-[11px] font-medium">{course.duration || '2h 0m'}</span>
               </div>
             </div>
-
-            <button 
-              className="text-[#00113a] hover:text-[#D48806] transition-colors shrink-0"
-              onClick={(e) => {
-                e.preventDefault(); // prevent navigation on bookmark click
-                // Add your bookmark toggle logic here
-              }}
-            >
-              <Bookmark size={20} />
-            </button>
           </div>
         </div>
       </Link>

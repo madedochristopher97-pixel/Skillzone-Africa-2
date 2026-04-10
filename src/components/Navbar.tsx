@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Search, ChevronDown, ExternalLink, Bell, User, LogOut, LayoutDashboard, Award, Settings } from 'lucide-react';
+import { Menu, X, Search, ChevronDown, ExternalLink, Bell, User, LogOut, LayoutDashboard, Award, Settings, Bookmark } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '../constants';
@@ -164,6 +164,10 @@ export default function Navbar() {
                         <Link to="/learner-dashboard" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-4 py-2 text-sm text-[#444650] hover:bg-[#f6f3ee] rounded-lg transition-colors">
                           <LayoutDashboard size={16} />
                           My Dashboard
+                        </Link>
+                        <Link to="/learner-dashboard?tab=bookmarks" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-4 py-2 text-sm text-[#444650] hover:bg-[#f6f3ee] rounded-lg transition-colors">
+                          <Bookmark size={16} />
+                          My Bookmarks
                         </Link>
                         <Link to="/learner-dashboard/certificates" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-4 py-2 text-sm text-[#444650] hover:bg-[#f6f3ee] rounded-lg transition-colors">
                           <Award size={16} />
