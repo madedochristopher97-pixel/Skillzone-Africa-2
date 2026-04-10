@@ -2,8 +2,12 @@ import { PlayCircle, Award, BookOpen, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { DURATIONS, EASINGS } from '../../constants/animations';
+import { useState } from 'react';
+import { COURSES } from '../../constants';
+import CourseCard from '../../components/CourseCard';
 
 export default function LearnerDashboardOverview() {
+  const [activeTab, setActiveTab] = useState<'All Courses' | 'In Progress' | 'Completed' | 'Saved Bookmarks'>('All Courses');
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   const shouldReduceMotion = useReducedMotion();
 
@@ -138,84 +142,106 @@ export default function LearnerDashboardOverview() {
       {/* My Courses Grid */}
       <motion.div variants={item}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
-          <h2 className="font-headline text-2xl font-bold text-[#00113a]">My Courses</h2>
-          <div className="flex gap-6 text-sm font-semibold">
-            <Link to="/learner-dashboard/courses" className="text-[#00113a] border-b-2 border-[#ffbf00] pb-1">All Courses</Link>
-            <Link to="/learner-dashboard/courses" className="text-[#6B7280] hover:text-[#00113a] pb-1">In Progress</Link>
-            <Link to="/learner-dashboard/courses" className="text-[#6B7280] hover:text-[#00113a] pb-1">Completed</Link>
+          <h2 className="font-headline text-2xl font-bold text-[#00113a] shrink-0">My Courses</h2>
+          <div className="flex gap-4 sm:gap-6 text-sm font-semibold overflow-x-auto pb-2 scrollbar-hide">
+            {(['All Courses', 'In Progress', 'Completed', 'Saved Bookmarks'] as const).map(tab => (
+              <button 
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`whitespace-nowrap pb-1 transition-colors ${activeTab === tab ? 'text-[#00113a] border-b-2 border-[#ffbf00]' : 'text-[#6B7280] hover:text-[#00113a]'}`}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1 - Completed */}
-          <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
-            <div className="h-40 relative">
-              <img src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Effective Communication" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              <div className="absolute top-4 right-4 bg-[#e8f5e9] text-[#2e7d32] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-[#2e7d32]"></div>
-                Completed
-              </div>
-            </div>
-            <div className="p-6 flex flex-col flex-1">
-              <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">SOFT SKILLS</p>
-              <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-6 flex-1">Effective Communication</h3>
-              <Link to="/courses/3" className="w-full py-2.5 rounded-xl border-2 border-[#f6f3ee] text-[#00113a] font-bold text-sm hover:bg-[#f6f3ee] transition-colors text-center">
-                View Details
-              </Link>
-            </div>
-          </div>
+          {activeTab === 'Saved Bookmarks' ? (
+            COURSES.slice(0, 4).map(course => (
+              <CourseCard key={course.id} course={course} />
+            ))
+          ) : (
+            <>
+              {/* Card 1 - Completed */}
+              {(activeTab === 'All Courses' || activeTab === 'Completed') && (
+                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
+                  <div className="h-40 relative">
+                    <img src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Effective Communication" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <div className="absolute top-4 right-4 bg-[#e8f5e9] text-[#2e7d32] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-full bg-[#2e7d32]"></div>
+                      Completed
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">SOFT SKILLS</p>
+                    <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-6 flex-1">Effective Communication</h3>
+                    <Link to="/courses/3" className="w-full py-2.5 rounded-xl border-2 border-[#f6f3ee] text-[#00113a] font-bold text-sm hover:bg-[#f6f3ee] transition-colors text-center">
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              )}
 
-          {/* Card 2 - Completed */}
-          <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
-            <div className="h-40 relative">
-              <img src="https://images.pexels.com/photos/5466785/pexels-photo-5466785.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Personal Finance 101" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              <div className="absolute top-4 right-4 bg-[#e8f5e9] text-[#2e7d32] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-[#2e7d32]"></div>
-                Completed
-              </div>
-            </div>
-            <div className="p-6 flex flex-col flex-1">
-              <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">FINANCE</p>
-              <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-6 flex-1">Personal Finance 101</h3>
-              <Link to="/courses/1" className="w-full py-2.5 rounded-xl border-2 border-[#f6f3ee] text-[#00113a] font-bold text-sm hover:bg-[#f6f3ee] transition-colors text-center">
-                View Details
-              </Link>
-            </div>
-          </div>
+              {/* Card 2 - Completed */}
+              {(activeTab === 'All Courses' || activeTab === 'Completed') && (
+                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
+                  <div className="h-40 relative">
+                    <img src="https://images.pexels.com/photos/5466785/pexels-photo-5466785.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Personal Finance 101" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <div className="absolute top-4 right-4 bg-[#e8f5e9] text-[#2e7d32] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-full bg-[#2e7d32]"></div>
+                      Completed
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">FINANCE</p>
+                    <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-6 flex-1">Personal Finance 101</h3>
+                    <Link to="/courses/1" className="w-full py-2.5 rounded-xl border-2 border-[#f6f3ee] text-[#00113a] font-bold text-sm hover:bg-[#f6f3ee] transition-colors text-center">
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              )}
 
-          {/* Card 3 - In Progress */}
-          <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
-            <div className="h-40 relative">
-              <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Leading High-Performance Teams" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-            </div>
-            <div className="p-6 flex flex-col flex-1">
-              <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">LEADERSHIP</p>
-              <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-4 flex-1">Leading High-Performance Teams</h3>
-              <div className="h-1.5 bg-[#f6f3ee] rounded-full overflow-hidden mb-4">
-                <div className="h-full bg-[#ffbf00] w-[25%] rounded-full"></div>
-              </div>
-              <Link to="/courses/9/learn" className="w-full py-2.5 rounded-xl bg-[#00113a] text-white font-bold text-sm hover:bg-[#002366] transition-colors text-center">
-                Continue
-              </Link>
-            </div>
-          </div>
+              {/* Card 3 - In Progress */}
+              {(activeTab === 'All Courses' || activeTab === 'In Progress') && (
+                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
+                  <div className="h-40 relative">
+                    <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Leading High-Performance Teams" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">LEADERSHIP</p>
+                    <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-4 flex-1">Leading High-Performance Teams</h3>
+                    <div className="h-1.5 bg-[#f6f3ee] rounded-full overflow-hidden mb-4">
+                      <div className="h-full bg-[#ffbf00] w-[25%] rounded-full"></div>
+                    </div>
+                    <Link to="/courses/9/learn" className="w-full py-2.5 rounded-xl bg-[#00113a] text-white font-bold text-sm hover:bg-[#002366] transition-colors text-center">
+                      Continue
+                    </Link>
+                  </div>
+                </div>
+              )}
 
-          {/* Card 4 - In Progress */}
-          <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
-            <div className="h-40 relative">
-              <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Introduction to Data Science" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-            </div>
-            <div className="p-6 flex flex-col flex-1">
-              <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">DATA</p>
-              <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-4 flex-1">Introduction to Data Science</h3>
-              <div className="h-1.5 bg-[#f6f3ee] rounded-full overflow-hidden mb-4">
-                <div className="h-full bg-[#ffbf00] w-[80%] rounded-full"></div>
-              </div>
-              <Link to="/courses/8/learn" className="w-full py-2.5 rounded-xl bg-[#00113a] text-white font-bold text-sm hover:bg-[#002366] transition-colors text-center">
-                Continue
-              </Link>
-            </div>
-          </div>
+              {/* Card 4 - In Progress */}
+              {(activeTab === 'All Courses' || activeTab === 'In Progress') && (
+                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 flex flex-col h-full">
+                  <div className="h-40 relative">
+                    <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Introduction to Data Science" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-[10px] font-bold text-[#D48806] uppercase tracking-wider mb-2">DATA</p>
+                    <h3 className="font-headline font-bold text-[#00113a] leading-tight mb-4 flex-1">Introduction to Data Science</h3>
+                    <div className="h-1.5 bg-[#f6f3ee] rounded-full overflow-hidden mb-4">
+                      <div className="h-full bg-[#ffbf00] w-[80%] rounded-full"></div>
+                    </div>
+                    <Link to="/courses/8/learn" className="w-full py-2.5 rounded-xl bg-[#00113a] text-white font-bold text-sm hover:bg-[#002366] transition-colors text-center">
+                      Continue
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </motion.div>
     </motion.div>

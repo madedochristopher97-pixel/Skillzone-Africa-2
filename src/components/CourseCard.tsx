@@ -48,7 +48,7 @@ export default function CourseCard({ course, className = "" }: CourseCardProps) 
           <div className="flex items-center justify-between gap-2 mb-3">
             <div className="flex items-center gap-1.5 flex-1 min-w-0">
               <span className="text-sm font-medium text-[#444650] truncate">{course.instructor.name}</span>
-              <span className="material-symbols-outlined text-[14px] text-white bg-[#2e7d32] rounded-full p-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+              <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
                 check
               </span>
             </div>
@@ -98,7 +98,7 @@ export default function CourseCard({ course, className = "" }: CourseCardProps) 
               </div>
 
               {/* Duration */}
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 whitespace-nowrap shrink-0">
                 <Clock size={14} className="text-[#757682]" />
                 <span className="text-[11px] font-medium">{course.duration || '2h 0m'}</span>
               </div>

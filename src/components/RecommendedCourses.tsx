@@ -12,7 +12,7 @@ export default function RecommendedCourses() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 px-4">
           <div>
-            <h2 className="font-headline font-bold text-4xl md:text-5xl text-[#00113a] mb-2 tracking-tight">Recommended for you</h2>
+            <h2 className="font-headline font-bold text-4xl md:text-5xl text-[#00113a] mb-2 tracking-tight">Popular in Skillzone</h2>
             <p className="font-body text-[#757682] text-lg max-w-md">Our curators' picks for the month based on industry trends.</p>
           </div>
           <Link to="/courses" className="flex items-center gap-2 text-[#00113a] font-bold hover:gap-4 transition-all group border-b-2 border-transparent hover:border-[#ffbf00] pb-1">
@@ -44,7 +44,7 @@ export default function RecommendedCourses() {
                 <div className="flex items-center gap-3 mb-6">
                   <img alt={featured.instructor.name} className="w-10 h-10 rounded-full border-2 border-[#ffbf00] object-cover" src={featured.instructor.avatar} referrerPolicy="no-referrer" />
                   <span className="text-white font-bold opacity-90">{featured.instructor.name}</span>
-                  <span className="material-symbols-outlined text-[14px] text-white bg-[#2e7d32] rounded-full p-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
                     check
                   </span>
                 </div>
@@ -119,7 +119,7 @@ export default function RecommendedCourses() {
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-1.5 flex-1 min-w-0">
                       <span className="text-xs font-bold text-[#757682] truncate">{course.instructor.name}</span>
-                      <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
                         check
                       </span>
                     </div>
@@ -201,7 +201,7 @@ export default function RecommendedCourses() {
                     <div className="flex items-center gap-3 flex-1">
                       <img alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover border-2 border-[#ffbf00]/20" src={course.instructor.avatar} referrerPolicy="no-referrer" />
                       <span className="text-sm font-bold text-[#757682]">{course.instructor.name}</span>
-                      <span className="material-symbols-outlined text-[12px] text-white bg-[#2e7d32] rounded-full p-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-[1px] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
                         check
                       </span>
                     </div>
