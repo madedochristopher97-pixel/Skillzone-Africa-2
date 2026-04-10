@@ -12,6 +12,10 @@ export interface Course {
   image: string;
   featured?: boolean;
   tag?: string;
+  level?: string;
+  duration?: string;
+  tool?: string;
+  extraTags?: string;
 }
 
 export interface Testimonial {

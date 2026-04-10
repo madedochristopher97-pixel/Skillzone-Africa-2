@@ -1,5 +1,5 @@
 import { COURSES } from '../constants';
-import { Star, ArrowRight } from 'lucide-react';
+import { Star, ArrowRight, Users, Clock, Bookmark } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -44,15 +44,51 @@ export default function RecommendedCourses() {
                 <div className="flex items-center gap-3 mb-6">
                   <img alt={featured.instructor.name} className="w-10 h-10 rounded-full border-2 border-[#ffbf00] object-cover" src={featured.instructor.avatar} referrerPolicy="no-referrer" />
                   <span className="text-white font-bold opacity-90">{featured.instructor.name}</span>
+                  <span className="material-symbols-outlined text-[14px] text-white bg-[#2e7d32] rounded-full p-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    check
+                  </span>
                 </div>
-                <h3 className="font-headline font-black text-3xl md:text-4xl text-white mb-8 leading-tight tracking-tight">{featured.title}</h3>
+                <h3 className="font-headline font-black text-3xl md:text-4xl text-white mb-4 leading-tight tracking-tight">{featured.title}</h3>
+                
+                <div className="flex items-center gap-2 mb-8">
+                  {featured.tool && (
+                    <span className="bg-white/20 text-white text-[11px] font-bold px-3 py-1 rounded-full">
+                      {featured.tool}
+                    </span>
+                  )}
+                  {featured.extraTags && (
+                    <span className="text-[11px] font-bold text-white/70">
+                      {featured.extraTags}
+                    </span>
+                  )}
+                </div>
+
                 <div className="flex items-center justify-between border-t border-white/10 pt-6">
-                  <div className="flex items-center gap-2">
-                    <Star className="text-[#ffbf00] fill-current" size={20} />
-                    <span className="text-white font-black text-xl">{featured.rating}</span>
-                    <span className="text-white/50 text-sm">({featured.students} learners)</span>
+                  <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-1.5" title={featured.level || 'Any level'}>
+                      <div className="flex items-end gap-[2px] h-3">
+                        <div className={`w-1 h-1.5 rounded-sm transition-colors ${(featured.level === 'Any level' || featured.level === 'Beginner') ? 'bg-[#ffbf00]' : 'bg-white/20'}`}></div>
+                        <div className={`w-1 h-2.5 rounded-sm transition-colors ${(featured.level === 'Any level' || featured.level === 'Intermediate') ? 'bg-[#ffbf00]' : 'bg-white/20'}`}></div>
+                        <div className={`w-1 h-3.5 rounded-sm transition-colors ${(featured.level === 'Any level' || featured.level === 'Advanced') ? 'bg-[#ffbf00]' : 'bg-white/20'}`}></div>
+                      </div>
+                      <span className="text-white text-xs font-bold hidden sm:inline-block">{featured.level || 'Any level'}</span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                      <Star className="text-[#ffbf00] fill-current" size={16} />
+                      <span className="text-white font-bold text-sm">{featured.rating}</span>
+                      <span className="text-white/50 text-xs">({featured.students})</span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="text-white/70" size={16} />
+                      <span className="text-white text-xs font-bold">{featured.duration || '2h 0m'}</span>
+                    </div>
                   </div>
-                  <div className="text-[#ffbf00] font-black text-3xl">{featured.price}</div>
+                  
+                  <button className="text-white hover:text-[#ffbf00] transition-colors shrink-0">
+                    <Bookmark size={20} />
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -79,18 +115,60 @@ export default function RecommendedCourses() {
                     </span>
                   </div>
                 </div>
-                <div className="p-8 flex-1 flex flex-col">
-                  <div className="flex items-center gap-3 mb-6">
-                    <img alt={course.instructor.name} className="w-8 h-8 rounded-full object-cover" src={course.instructor.avatar} referrerPolicy="no-referrer" />
-                    <span className="text-xs font-bold text-[#757682]">{course.instructor.name}</span>
-                  </div>
-                  <h3 className="font-headline font-bold text-xl leading-snug mb-4 text-[#00113a] group-hover:text-[#ffbf00] transition-colors line-clamp-2">{course.title}</h3>
-                  <div className="mt-auto flex items-center justify-between pt-6 border-t border-[#f6f3ee]">
-                    <div className="flex items-center gap-1.5">
-                      <Star className="text-[#ffbf00] fill-current" size={16} />
-                      <span className="text-sm font-black text-[#00113a]">{course.rating}</span>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-1.5 flex-1 min-w-0">
+                      <span className="text-xs font-bold text-[#757682] truncate">{course.instructor.name}</span>
+                      <span className="material-symbols-outlined text-[10px] text-white bg-[#2e7d32] rounded-full p-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                        check
+                      </span>
                     </div>
-                    <div className="font-black text-xl text-[#00113a]">{course.price}</div>
+                    <div className="flex items-center gap-1 shrink-0">
+                      <Star className="text-[#444650] fill-current" size={12} />
+                      <span className="text-xs font-bold text-[#00113a]">{course.rating}</span>
+                    </div>
+                  </div>
+
+                  <h3 className="font-headline font-bold text-lg leading-snug mb-3 text-[#00113a] group-hover:text-[#ffbf00] transition-colors line-clamp-2">{course.title}</h3>
+                  
+                  <div className="flex items-center gap-2 mt-auto mb-4">
+                    {course.tool && (
+                      <span className="bg-[#f0ebe4] text-[#444650] text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        {course.tool}
+                      </span>
+                    )}
+                    {course.extraTags && (
+                      <span className="text-[10px] font-bold text-[#757682]">
+                        {course.extraTags}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#f6f3ee]">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-end gap-[2px] h-3" title={course.level || 'Any level'}>
+                        <div className={`w-1 h-1.5 rounded-sm transition-colors ${(course.level === 'Any level' || course.level === 'Beginner') ? 'bg-[#8e24aa]' : 'bg-[#e5e2dd]'}`}></div>
+                        <div className={`w-1 h-2.5 rounded-sm transition-colors ${(course.level === 'Any level' || course.level === 'Intermediate') ? 'bg-[#8e24aa]' : 'bg-[#e5e2dd]'}`}></div>
+                        <div className={`w-1 h-3.5 rounded-sm transition-colors ${(course.level === 'Any level' || course.level === 'Advanced') ? 'bg-[#8e24aa]' : 'bg-[#e5e2dd]'}`}></div>
+                      </div>
+
+                      <div className="flex items-center gap-1">
+                        <Users size={12} className="text-[#757682]" />
+                        <span className="text-[10px] font-bold text-[#444650]">{course.students}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1">
+                        <Clock size={12} className="text-[#757682]" />
+                        <span className="text-[10px] font-bold text-[#444650]">{course.duration || '2h 0m'}</span>
+                      </div>
+                    </div>
+                    
+                    <button 
+                      className="text-[#00113a] hover:text-[#D48806] transition-colors shrink-0"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <Bookmark size={16} />
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -118,19 +196,65 @@ export default function RecommendedCourses() {
                     </span>
                   </div>
                 </div>
-                <div className="p-10 flex-1 flex flex-col">
-                  <div className="flex items-center gap-3 mb-8">
-                    <img alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover border-2 border-[#ffbf00]/20" src={course.instructor.avatar} referrerPolicy="no-referrer" />
-                    <span className="text-sm font-bold text-[#757682]">{course.instructor.name}</span>
-                  </div>
-                  <h3 className="font-headline font-black text-2xl leading-tight mb-6 text-[#00113a] group-hover:text-[#ffbf00] transition-colors">{course.title}</h3>
-                  <div className="mt-auto flex items-center justify-between pt-8 border-t border-[#f6f3ee]">
-                    <div className="flex items-center gap-2">
-                      <Star className="text-[#ffbf00] fill-current" size={20} />
-                      <span className="text-lg font-black text-[#00113a]">{course.rating}</span>
-                      <span className="text-[#757682] text-sm">({course.students})</span>
+                <div className="p-8 flex-1 flex flex-col justify-center">
+                  <div className="flex items-center justify-between gap-3 mb-6">
+                    <div className="flex items-center gap-3 flex-1">
+                      <img alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover border-2 border-[#ffbf00]/20" src={course.instructor.avatar} referrerPolicy="no-referrer" />
+                      <span className="text-sm font-bold text-[#757682]">{course.instructor.name}</span>
+                      <span className="material-symbols-outlined text-[12px] text-white bg-[#2e7d32] rounded-full p-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                        check
+                      </span>
                     </div>
-                    <div className="font-black text-2xl text-[#00113a]">{course.price}</div>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <Star className="text-[#444650] fill-current" size={16} />
+                      <span className="text-sm font-bold text-[#00113a]">{course.rating}</span>
+                      <span className="text-[#757682] text-xs">({course.students})</span>
+                    </div>
+                  </div>
+
+                  <h3 className="font-headline font-black text-2xl leading-tight mb-4 text-[#00113a] group-hover:text-[#ffbf00] transition-colors">{course.title}</h3>
+                  
+                  <div className="flex items-center gap-2 mt-auto mb-6">
+                    {course.tool && (
+                      <span className="bg-[#f0ebe4] text-[#444650] text-xs font-bold px-3 py-1 rounded-full">
+                        {course.tool}
+                      </span>
+                    )}
+                    {course.extraTags && (
+                      <span className="text-xs font-bold text-[#757682]">
+                        {course.extraTags}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="mt-auto flex items-center justify-between pt-6 border-t border-[#f6f3ee]">
+                    <div className="flex items-center gap-6">
+                      <div className="flex items-center gap-1.5" title={course.level || 'Any level'}>
+                        <div className="flex items-end gap-[2px] h-3">
+                          <div className={`w-1 h-1.5 rounded-sm transition-colors ${(course.level === 'Any level' || course.level === 'Beginner') ? 'bg-[#8e24aa]' : 'bg-[#e5e2dd]'}`}></div>
+                          <div className={`w-1 h-2.5 rounded-sm transition-colors ${(course.level === 'Any level' || course.level === 'Intermediate') ? 'bg-[#8e24aa]' : 'bg-[#e5e2dd]'}`}></div>
+                          <div className={`w-1 h-3.5 rounded-sm transition-colors ${(course.level === 'Any level' || course.level === 'Advanced') ? 'bg-[#8e24aa]' : 'bg-[#e5e2dd]'}`}></div>
+                        </div>
+                        <span className="text-xs font-bold text-[#444650] hidden sm:inline-block">{course.level || 'Any level'}</span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        <Users size={16} className="text-[#757682]" />
+                        <span className="text-xs font-bold text-[#444650]">{course.students}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1.5">
+                        <Clock size={16} className="text-[#757682]" />
+                        <span className="text-xs font-bold text-[#444650]">{course.duration || '2h 0m'}</span>
+                      </div>
+                    </div>
+                    
+                    <button 
+                      className="text-[#00113a] hover:text-[#D48806] transition-colors shrink-0"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <Bookmark size={20} />
+                    </button>
                   </div>
                 </div>
               </Link>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, Bell, ShoppingCart, Filter, ChevronLeft, ChevronRight, Star, Play, ArrowRight, Globe, Users, GraduationCap } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ALL_COURSES } from '../constants';
+import CourseCard from '../components/CourseCard';
 
 export default function Courses() {
   const [priceRange, setPriceRange] = useState(2500);
@@ -129,58 +130,11 @@ export default function Courses() {
             {/* Course Cards Grid */}
             <div className="flex flex-wrap justify-center gap-8">
               {ALL_COURSES.map((course) => (
-                <motion.div
-                  key={course.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -8 }}
-                  className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] bg-white rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-[#00113a]/5 transition-all duration-500 flex flex-col"
-                >
-                  <Link to={`/courses/${course.id}`} className="flex flex-col flex-1">
-                    <div className="relative aspect-video bg-[#e8e0d5] overflow-hidden">
-                      <img
-                        src={course.image}
-                        alt={course.title}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover mix-blend-multiply opacity-80 group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                          <Play className="w-6 h-6 text-[#00113a] fill-current" />
-                        </div>
-                      </div>
-                      {course.tag && (
-                        <div className="absolute top-4 left-4 bg-[#795900] text-white text-[10px] font-black uppercase px-2 py-1 rounded">
-                          {course.tag}
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="font-headline font-bold text-[#00113a] text-lg leading-tight mb-2 group-hover:text-[#795900] transition-colors">
-                        {course.title}
-                      </h3>
-                      <p className="text-sm text-[#757682] mb-4">{course.instructor.name}</p>
-                      <div className="flex items-center gap-2 mb-6">
-                        <div className="flex text-[#ffb300]">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`w-3 h-3 ${i < Math.floor(course.rating) ? 'fill-current' : ''}`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-xs font-bold text-[#00113a]">{course.rating}</span>
-                        <span className="text-xs text-[#757682]">({course.students})</span>
-                      </div>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="text-xl font-black text-[#00113a] font-headline">{course.price}</span>
-                        <button className="bg-[#00113a] hover:bg-[#002366] text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all active:scale-95">
-                          Enroll
-                        </button>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
+                <CourseCard 
+                  key={course.id} 
+                  course={course} 
+                  className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
+                />
               ))}
             </div>
 

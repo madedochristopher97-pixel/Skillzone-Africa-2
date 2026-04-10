@@ -1,39 +1,13 @@
-import { Search, Star, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { COURSES } from '../../constants';
+import CourseCard from '../../components/CourseCard';
 
 export default function LearnerExplore() {
-  const recommendedCourses = [
-    {
-      id: '101',
-      title: 'Advanced Python for Data Analysis',
-      category: 'DATA',
-      instructor: 'Dr. Amara Okafor',
-      rating: 4.9,
-      students: '1.2k',
-      image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600',
-      match: '98% Match'
-    },
-    {
-      id: '102',
-      title: 'UX/UI Design for African Markets',
-      category: 'DESIGN',
-      instructor: 'Kofi Mensah',
-      rating: 4.8,
-      students: '850',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600',
-      match: '92% Match'
-    },
-    {
-      id: '103',
-      title: 'Financial Modeling & Valuation',
-      category: 'FINANCE',
-      instructor: 'David Mensah',
-      rating: 4.9,
-      students: '2.1k',
-      image: 'https://images.pexels.com/photos/5466785/pexels-photo-5466785.jpeg?auto=compress&cs=tinysrgb&w=600',
-      match: '85% Match'
-    }
-  ];
+  const recommendedCourses = COURSES.slice(0, 3).map(course => ({
+    ...course,
+    tag: '98% Match'
+  }));
 
   const trendingCategories = [
     { name: 'Artificial Intelligence', count: '120+ courses', color: 'bg-[#e8f5e9]', textColor: 'text-[#2e7d32]' },
@@ -82,37 +56,7 @@ export default function LearnerExplore() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {recommendedCourses.map((course) => (
-            <div key={course.id} className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#c5c6d2]/20 group hover:shadow-xl transition-all duration-300 flex flex-col">
-              <div className="h-48 relative overflow-hidden">
-                <img 
-                  src={course.image} 
-                  alt={course.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute top-4 left-4 bg-[#00113a] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                  {course.category}
-                </div>
-                <div className="absolute top-4 right-4 bg-[#ffbf00] text-[#6d5000] text-[10px] font-bold px-3 py-1 rounded-full">
-                  {course.match}
-                </div>
-              </div>
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="font-headline font-bold text-lg text-[#00113a] leading-tight mb-2 group-hover:text-[#D48806] transition-colors">{course.title}</h3>
-                <p className="text-sm text-[#6B7280] mb-4">{course.instructor}</p>
-                
-                <div className="mt-auto flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    <Star className="text-[#ffbf00]" size={16} fill="currentColor" />
-                    <span className="text-sm font-bold text-[#00113a]">{course.rating}</span>
-                    <span className="text-xs text-[#6B7280]">({course.students})</span>
-                  </div>
-                  <Link to={`/courses/${course.id}`} className="text-sm font-bold text-[#00113a] hover:underline underline-offset-4">
-                    View Course
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <CourseCard key={course.id} course={course as any} />
           ))}
         </div>
       </div>
