@@ -69,3 +69,15 @@
 .asymmetric-clip {
   clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
 }
+
+.btn-cartoonish {
+  @apply transition-all duration-200 active:scale-95 border-2 border-transparent;
+}
+
+.btn-cartoonish:hover {
+  @apply border-black -translate-x-1 -translate-y-1 shadow-[4px_4px_0px_0px_#1c1c19];
+}
+
+.btn-cartoonish:active {
+  @apply shadow-none translate-x-0 translate-y-0 scale-[0.98];
+}

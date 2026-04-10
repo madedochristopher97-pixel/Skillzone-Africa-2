@@ -12,7 +12,7 @@ export default function InstructorCTA() {
             <p className="text-white/70 text-lg leading-relaxed max-w-lg">
               Join our community of 500+ professional tutors and start teaching today. Share your expertise with students across the continent and build a global brand.
             </p>
-            <Link to="/instructor-onboarding" className="inline-block bg-[#ffbf00] text-[#6d5000] font-bold px-10 py-4 rounded-xl text-lg transition-transform active:scale-95 hover:bg-[#ffdfa0]">
+            <Link to="/instructor-onboarding" className="inline-block bg-[#ffbf00] text-[#6d5000] font-bold px-10 py-4 rounded-xl text-lg transition-transform active:scale-95 hover:bg-[#ffdfa0] btn-cartoonish">
               Apply to Teach
             </Link>
           </div>

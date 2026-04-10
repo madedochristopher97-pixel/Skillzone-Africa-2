@@ -203,7 +203,7 @@ export default function Auth() {
 
             {/* CTA Buttons */}
             <div className="pt-4 space-y-4">
-              <button className="w-full py-4 bg-gradient-to-r from-[#00113a] to-[#002366] text-white font-bold rounded-xl hover:opacity-90 active:scale-[0.98] transition-all duration-200 text-base">
+              <button className="w-full py-4 bg-gradient-to-r from-[#00113a] to-[#002366] text-white font-bold rounded-xl hover:opacity-90 active:scale-[0.98] transition-all duration-200 text-base btn-cartoonish">
                 {isSignUp ? 'Create Account' : 'Sign In'}
               </button>
 
@@ -213,7 +213,7 @@ export default function Auth() {
                 <div className="h-[1px] flex-1 bg-[#c5c6d2] opacity-40"></div>
               </div>
 
-              <button className="w-full py-4 border border-[#c5c6d2] bg-white flex items-center justify-center gap-3 text-[#002366] font-semibold rounded-xl hover:bg-[#e5e2dd] transition-colors active:scale-[0.98]">
+              <button className="w-full py-4 border border-[#c5c6d2] bg-white flex items-center justify-center gap-3 text-[#002366] font-semibold rounded-xl hover:bg-[#e5e2dd] transition-colors active:scale-[0.98] btn-cartoonish">
                 <img
                   alt="Google Logo"
                   className="w-5 h-5"

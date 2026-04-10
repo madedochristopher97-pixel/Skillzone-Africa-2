@@ -228,7 +228,7 @@ export default function InstructorOnboarding() {
 
                   <div className="pt-6 flex justify-end">
                     <button 
-                      className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all" 
+                      className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all btn-cartoonish" 
                       type="submit"
                     >
                       Continue to Expertise
@@ -306,14 +306,14 @@ export default function InstructorOnboarding() {
                   {/* Continue Button */}
                   <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 pt-4">
                     <button 
-                      className="w-full md:w-[280px] h-[52px] flex items-center justify-center space-x-2 border-2 border-[#002366] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#002366] hover:text-white transition-all" 
+                      className="w-full md:w-[280px] h-[52px] flex items-center justify-center space-x-2 border-2 border-[#002366] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#002366] hover:text-white transition-all btn-cartoonish" 
                       type="button"
                       onClick={() => setStep(1)}
                     >
                       Back
                     </button>
                     <button 
-                      className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all ml-auto" 
+                      className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all ml-auto btn-cartoonish" 
                       type="submit"
                     >
                       Continue to Payout
@@ -510,14 +510,14 @@ export default function InstructorOnboarding() {
                     {/* Continue Button */}
                     <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 pt-4">
                       <button 
-                        className="w-full md:w-[280px] h-[52px] flex items-center justify-center space-x-2 border-2 border-[#002366] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#002366] hover:text-white transition-all" 
+                        className="w-full md:w-[280px] h-[52px] flex items-center justify-center space-x-2 border-2 border-[#002366] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#002366] hover:text-white transition-all btn-cartoonish" 
                         type="button"
                         onClick={() => setStep(2)}
                       >
                         Back
                       </button>
                       <button 
-                        className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all ml-auto" 
+                        className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all ml-auto btn-cartoonish" 
                         type="submit"
                       >
                         Finish Application

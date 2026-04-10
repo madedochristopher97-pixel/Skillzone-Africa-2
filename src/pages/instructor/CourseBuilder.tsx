@@ -804,7 +804,7 @@ export default function CourseBuilder() {
                 <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-surface-container-highest">
                   <button 
                     onClick={() => navigate('/instructor-dashboard')}
-                    className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-transparent border-2 border-primary-container text-primary-container rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-primary-container hover:text-white transition-all"
+                    className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-transparent border-2 border-primary-container text-primary-container rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-primary-container hover:text-white transition-all btn-cartoonish"
                   >
                     Save as Draft
                   </button>
@@ -869,7 +869,7 @@ export default function CourseBuilder() {
         <footer className="mt-16 pt-8 flex flex-col-reverse md:flex-row items-center justify-between gap-4 border-t border-surface-container-highest">
           <button 
             onClick={handleBack}
-            className="w-full md:w-[280px] h-[52px] flex items-center justify-center space-x-2 border-2 border-[#002366] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#002366] hover:text-white transition-all"
+            className="w-full md:w-[280px] h-[52px] flex items-center justify-center space-x-2 border-2 border-[#002366] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#002366] hover:text-white transition-all btn-cartoonish"
           >
             <span className="material-symbols-outlined text-sm">arrow_back</span>
             <span>Back</span>
@@ -881,7 +881,7 @@ export default function CourseBuilder() {
               )}
               <button 
                 onClick={handleNext}
-                className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all"
+                className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all btn-cartoonish"
               >
                 Save & Continue
               </button>
@@ -889,7 +889,7 @@ export default function CourseBuilder() {
           ) : (
             <button 
               onClick={() => navigate('/course-published-success')}
-              className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all ml-auto"
+              className="w-full md:w-[280px] h-[52px] flex items-center justify-center bg-[#FFBF00] text-[#002366] rounded-xl font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#D48806] transition-all ml-auto btn-cartoonish"
             >
               Publish Course
             </button>

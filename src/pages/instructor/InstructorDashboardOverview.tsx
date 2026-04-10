@@ -145,7 +145,7 @@ export default function InstructorDashboardOverview() {
             <div className="relative z-10">
               <h3 className="font-headline font-bold text-xl mb-2">Ready to expand?</h3>
               <p className="text-blue-100 text-sm leading-relaxed mb-6">Launch a new course today and reaching more students across the continent.</p>
-              <Link to="/instructor-dashboard/course-builder" className="w-full py-4 bg-white text-[#002366] rounded-xl font-headline font-bold text-sm shadow-lg shadow-black/10 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+              <Link to="/instructor-dashboard/course-builder" className="w-full py-4 bg-white text-[#002366] rounded-xl font-headline font-bold text-sm shadow-lg shadow-black/10 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2 btn-cartoonish">
                 Launch New Course <ArrowRight size={16} />
               </Link>
             </div>

@@ -26,11 +26,11 @@ export default function Hero() {
               onClick={() => {
                 document.getElementById('what-brings-you')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-[#ffbf00] text-[#6d5000] hover:bg-[#ffdfa0] font-bold px-10 py-4 rounded-xl text-lg transition-transform active:scale-95 text-center"
+              className="bg-[#ffbf00] text-[#6d5000] hover:bg-[#ffdfa0] font-bold px-10 py-4 rounded-xl text-lg transition-transform active:scale-95 text-center btn-cartoonish"
             >
               Start Learning
             </button>
-            <Link to="/instructor-onboarding" className="border-2 border-[#00113a] text-[#00113a] font-bold px-10 py-4 rounded-xl text-lg hover:bg-[#002366] hover:text-white transition-all active:scale-95 text-center">
+            <Link to="/instructor-onboarding" className="border-2 border-[#00113a] text-[#00113a] font-bold px-10 py-4 rounded-xl text-lg hover:bg-[#002366] hover:text-white transition-all active:scale-95 text-center btn-cartoonish">
               Become an Instructor
             </Link>
           </div>
