@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, CheckCircle2, XCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { DURATIONS, EASINGS, SPRINGS, tabContentVariants } from '../constants/animations';
+
+/* Simulated referral code registry — swap with API lookup in production */
+const VALID_REFERRAL_CODES: Record<string, string> = {
+  'SKILLZ-CHR2024': 'Christopher M.',
+  'SKILLZ-AIM2024': 'Amina O.',
+  'SKILLZ-KOF2024': 'Kofi A.',
+};
 
 export default function Auth() {
   const location = useLocation();
@@ -13,6 +20,26 @@ export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(location.state?.isSignUp ?? true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [referralCode, setReferralCode] = useState('');
+  const [referralStatus, setReferralStatus] = useState<'idle' | 'valid' | 'invalid'>('idle');
+  const [referrerName, setReferrerName] = useState('');
+
+  const validateReferralCode = (code: string) => {
+    if (!code.trim()) {
+      setReferralStatus('idle');
+      setReferrerName('');
+      return;
+    }
+    const upper = code.trim().toUpperCase();
+    const match = VALID_REFERRAL_CODES[upper];
+    if (match) {
+      setReferralStatus('valid');
+      setReferrerName(match);
+    } else {
+      setReferralStatus('invalid');
+      setReferrerName('');
+    }
+  };
 
   useEffect(() => {
     if (location.state?.isSignUp !== undefined) {
@@ -183,12 +210,61 @@ export default function Auth() {
                   exit={{ opacity: 0, height: 0 }}
                   className="space-y-1.5 overflow-hidden"
                 >
-                  <label className="block text-xs font-bold text-[#444650] uppercase tracking-wider font-label">Referral Code (Optional)</label>
-                  <input
-                    className="w-full px-4 py-3 rounded-lg border-[#c5c6d2] bg-white focus:ring-2 focus:ring-[#795900] focus:border-transparent transition-all outline-none text-sm"
-                    placeholder="SZ-12345"
-                    type="text"
-                  />
+                  <label htmlFor="referral-code-input" className="block text-xs font-bold text-[#444650] uppercase tracking-wider font-label">
+                    Have a referral code?{' '}
+                    <span className="text-[#757682] font-normal normal-case tracking-normal">(Optional)</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="referral-code-input"
+                      className={`w-full px-4 py-3 pr-10 rounded-lg bg-white focus:ring-2 focus:border-transparent transition-all outline-none text-sm font-mono uppercase tracking-wider border ${
+                        referralStatus === 'valid'
+                          ? 'border-green-400 focus:ring-green-300'
+                          : referralStatus === 'invalid'
+                          ? 'border-red-400 focus:ring-red-300'
+                          : 'border-[#c5c6d2] focus:ring-[#795900]'
+                      }`}
+                      placeholder="e.g. SKILLZ-CHR2024"
+                      type="text"
+                      value={referralCode}
+                      onChange={(e) => {
+                        setReferralCode(e.target.value);
+                        validateReferralCode(e.target.value);
+                      }}
+                    />
+                    {/* Inline status icon */}
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      {referralStatus === 'valid' && <CheckCircle2 size={18} className="text-green-500" />}
+                      {referralStatus === 'invalid' && <XCircle size={18} className="text-red-500" />}
+                    </span>
+                  </div>
+                  {/* Validation feedback */}
+                  <AnimatePresence mode="wait">
+                    {referralStatus === 'valid' && (
+                      <motion.p
+                        key="valid-msg"
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        className="text-xs text-green-600 font-semibold flex items-center gap-1"
+                      >
+                        <CheckCircle2 size={12} />
+                        Referral code applied! {referrerName} invited you.
+                      </motion.p>
+                    )}
+                    {referralStatus === 'invalid' && (
+                      <motion.p
+                        key="invalid-msg"
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        className="text-xs text-red-500 font-semibold flex items-center gap-1"
+                      >
+                        <XCircle size={12} />
+                        Invalid code. Please check and try again.
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               )}
             </AnimatePresence>

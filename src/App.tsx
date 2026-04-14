@@ -40,6 +40,8 @@ import LearnerCertificates from './pages/learner/LearnerCertificates';
 import LearnerExplore from './pages/learner/LearnerExplore';
 import LearnerProfile from './pages/learner/LearnerProfile';
 import LearnerSettings from './pages/learner/LearnerSettings';
+import LearnerWallet from './pages/learner/LearnerWallet';
+import LearnerReferrals from './pages/learner/LearnerReferrals';
 
 function ProtectedRoute({ children, role }: { children: React.ReactNode, role?: 'learner' | 'instructor' }) {
   const { isAuthenticated, user } = useAuth();
@@ -152,6 +154,8 @@ function AppContent() {
                 <Route index element={<LearnerDashboardOverview />} />
                 <Route path="courses" element={<LearnerCourses />} />
                 <Route path="certificates" element={<LearnerCertificates />} />
+                <Route path="wallet" element={<LearnerWallet />} />
+                <Route path="referrals" element={<LearnerReferrals />} />
                 <Route path="explore" element={<LearnerExplore />} />
                 <Route path="profile" element={<LearnerProfile />} />
                 <Route path="settings" element={<LearnerSettings />} />

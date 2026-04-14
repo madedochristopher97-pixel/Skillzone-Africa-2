@@ -24,7 +24,7 @@ export default function Categories() {
                   whileHover={{ scale: 1.05 }}
                   className="flex flex-col items-center gap-4"
                 >
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center transition-all group-hover:bg-[#ffbf00] shadow-sm group-hover:shadow-xl">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center transition-all group-hover:bg-[#ffbf00] btn-cartoonish">
                     {IconComponent && <IconComponent className="text-[#00113a]" size={40} />}
                   </div>
                   <span className="font-bold text-sm md:text-base text-center text-[#00113a]">{category.name}</span>

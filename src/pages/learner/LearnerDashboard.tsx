@@ -4,6 +4,8 @@ import {
   LayoutDashboard, 
   BookOpen, 
   Award, 
+  Wallet,
+  Users,
   Compass, 
   User, 
   Settings, 
@@ -34,12 +36,14 @@ export default function LearnerDashboard() {
   }, []);
 
   const navItems = [
-    { name: 'Dashboard', path: '/learner-dashboard', icon: LayoutDashboard },
-    { name: 'My Courses', path: '/learner-dashboard/courses', icon: BookOpen },
+    { name: 'Dashboard',   path: '/learner-dashboard',              icon: LayoutDashboard },
+    { name: 'My Courses', path: '/learner-dashboard/courses',       icon: BookOpen },
     { name: 'Certificates', path: '/learner-dashboard/certificates', icon: Award },
-    { name: 'Explore', path: '/learner-dashboard/explore', icon: Compass },
-    { name: 'Profile', path: '/learner-dashboard/profile', icon: User },
-    { name: 'Settings', path: '/learner-dashboard/settings', icon: Settings },
+    { name: 'Wallet',     path: '/learner-dashboard/wallet',        icon: Wallet },
+    { name: 'Refer & Earn', path: '/learner-dashboard/referrals',   icon: Users, badge: 'NEW' },
+    { name: 'Explore',    path: '/learner-dashboard/explore',       icon: Compass },
+    { name: 'Profile',    path: '/learner-dashboard/profile',       icon: User },
+    { name: 'Settings',   path: '/learner-dashboard/settings',      icon: Settings },
   ];
 
   const handleLogout = () => {
@@ -91,7 +95,12 @@ export default function LearnerDashboard() {
                 `}
               >
                 <Icon size={20} className={isActive ? 'text-[#ffbf00]' : ''} />
-                {item.name}
+                <span className="flex-1">{item.name}</span>
+                {'badge' in item && item.badge && (
+                  <span className="text-[10px] font-bold bg-[#FFBF00] text-[#00113a] px-1.5 py-0.5 rounded-full leading-none">
+                    {item.badge}
+                  </span>
+                )}
               </Link>
             );
           })}

@@ -55,7 +55,7 @@ export default function ApplicationSubmitted() {
             <div className="flex flex-col gap-4">
               <Link 
                 to="/instructor-dashboard"
-                className="w-full h-12 flex items-center justify-center px-8 bg-[#002366] text-white font-headline font-bold rounded-xl hover:bg-[#003399] transition-colors tracking-tight text-center"
+                className="w-full h-12 flex items-center justify-center px-8 bg-[#002366] text-white font-headline font-bold rounded-xl transition-all tracking-tight text-center btn-cartoonish"
               >
                 Go to Dashboard
               </Link>

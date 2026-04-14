@@ -1,9 +1,11 @@
 import { Facebook, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SavannaPattern } from './PatternElements';
 
 export default function Footer() {
   return (
-    <footer className="w-full pt-16 pb-8 bg-[#f6f3ee]">
+    <footer className="w-full pt-16 pb-8 bg-[#f6f3ee] relative overflow-hidden">
+      <SavannaPattern opacity={0.03} />
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
         <div className="space-y-6">
           <Link to="/" className="inline-block">

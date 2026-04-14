@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
+import CourseThumbnailSelector from '../../components/CourseThumbnailSelector';
 
 export default function CourseBuilder() {
   const navigate = useNavigate();
@@ -185,30 +186,11 @@ export default function CourseBuilder() {
               </div>
               
               {/* Thumbnail Section */}
-              <div className="space-y-3">
-                <label className="block font-headline font-bold text-primary text-sm tracking-tight uppercase">Course Thumbnail</label>
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-                  {/* Dropzone */}
-                  <div className="md:col-span-3 h-48 border-2 border-dashed border-outline-variant rounded-2xl flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-container-highest/30 transition-all group cursor-pointer">
-                    <span className="material-symbols-outlined text-4xl text-slate-400 mb-3 group-hover:text-primary transition-colors">cloud_upload</span>
-                    <p className="text-sm font-medium text-primary">Drag and drop or <span className="text-secondary font-bold">click to upload</span></p>
-                    <p className="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">JPG, PNG (max. 5MB)</p>
-                  </div>
-                  
-                  {/* Preview Image */}
-                  <div className="md:col-span-2 relative h-48 group">
-                    <img 
-                      alt="Course Thumbnail Preview" 
-                      className="w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 shadow-sm" 
-                      src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    />
-                    <div className="absolute inset-0 bg-primary/10 rounded-2xl pointer-events-none"></div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <span className="bg-surface-container-lowest/90 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-bold text-primary uppercase tracking-wider shadow-[0_32px_64px_-12px_rgba(28,28,25,0.06)]">Preview Image</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CourseThumbnailSelector
+                courseTitle="Modern Architecture Foundations in West Africa"
+                instructorName="Your Name"
+                categoryName="Business & Finance"
+              />
             </div>
           </div>
         )}

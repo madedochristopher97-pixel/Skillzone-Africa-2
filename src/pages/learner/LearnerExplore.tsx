@@ -19,27 +19,35 @@ export default function LearnerExplore() {
   return (
     <div className="max-w-6xl mx-auto space-y-12">
       {/* Header & Search */}
-      <div className="bg-[#00113a] rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
+      <div className="bg-[#00113a] rounded-[2rem] p-8 md:p-12 text-white relative overflow-hidden shadow-lg border border-white/10">
+        {/* Background Pattern Asset */}
+        <div 
+          className="absolute inset-0 w-full h-full opacity-[0.12] pointer-events-none"
+          style={{ 
+            backgroundImage: 'url("/Patterns 2.jfif")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            mixBlendMode: 'overlay'
+          }}
+          aria-hidden="true"
+        />
+        
         <div className="relative z-10 max-w-2xl">
-          <h1 className="font-headline text-3xl md:text-4xl font-bold mb-4">What do you want to learn next?</h1>
-          <p className="text-white/80 text-lg mb-8">Discover courses tailored to your interests and career goals.</p>
+          <h1 className="font-headline text-3xl md:text-5xl font-bold mb-4 tracking-tight">What do you want to learn next?</h1>
+          <p className="text-white/80 text-lg mb-8 font-medium">Discover courses tailored to your interests and career goals.</p>
           
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]" size={20} />
+          <div className="relative group/search">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280] group-focus-within/search:text-[#002366] transition-colors" size={20} />
             <input 
               type="text" 
               placeholder="Search for skills, courses, or instructors..." 
-              className="w-full pl-12 pr-4 py-4 bg-white rounded-xl text-[#00113a] focus:outline-none focus:ring-4 focus:ring-white/20 font-medium"
+              className="w-full pl-12 pr-4 py-5 bg-white/95 backdrop-blur-sm rounded-2xl text-[#00113a] focus:outline-none focus:ring-4 focus:ring-[#ffbf00]/30 font-medium transition-all shadow-xl"
             />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#ffbf00] text-[#6d5000] px-6 py-2 rounded-lg font-bold hover:bg-[#e6ac00] transition-colors">
+            <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#ffbf00] text-[#6d5000] px-8 py-3 rounded-xl font-bold hover:bg-[#e6ac00] active:scale-95 transition-all shadow-lg hover:shadow-[#ffbf00]/20">
               Search
             </button>
           </div>
         </div>
-        
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-[#ffbf00]/10 rounded-full blur-2xl translate-y-1/2"></div>
       </div>
 
       {/* Recommended for You */}
