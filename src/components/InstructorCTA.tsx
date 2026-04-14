@@ -19,7 +19,7 @@ export default function InstructorCTA() {
           <div className="relative h-[400px] lg:h-auto">
             <img 
               alt="Instructor" 
-              className="absolute inset-0 w-full h-full object-contain p-4 lg:p-8" 
+              className="absolute inset-0 w-full h-full object-cover" 
               src="/Skills CTA@2x.png"
               loading="lazy"
               decoding="async"
