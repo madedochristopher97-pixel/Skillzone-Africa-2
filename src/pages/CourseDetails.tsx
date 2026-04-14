@@ -113,6 +113,18 @@ export default function CourseDetails() {
       transition={{ duration: 0.5 }}
       className="bg-[#fcf9f4] min-h-screen font-body pb-24 relative"
     >
+      {/* Background Texture Pattern */}
+      <div 
+        className="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none z-0"
+        style={{ 
+          backgroundImage: 'url("/Patterns.jfif")',
+          backgroundSize: '300px',
+          backgroundRepeat: 'repeat',
+          mixBlendMode: 'multiply'
+        }}
+        aria-hidden="true"
+      />
+
       {/* Auth Modal Overlay */}
       <AnimatePresence>
         {showAuthModal && (

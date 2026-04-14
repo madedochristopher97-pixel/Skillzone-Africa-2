@@ -4,7 +4,7 @@ import React from 'react';
  * Savanna Lines SVG pattern
  * Used in banners and footers for a subtle African aesthetic.
  */
-export const SavannaPattern: React.FC<{ opacity?: number }> = ({ opacity = 0.05 }) => (
+export const SavannaPattern: React.FC<{ opacity?: number }> = ({ opacity = 0.1 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="absolute inset-0 w-full h-full pointer-events-none"
@@ -13,12 +13,26 @@ export const SavannaPattern: React.FC<{ opacity?: number }> = ({ opacity = 0.05 
   >
     <defs>
       <pattern id="savanna" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-        {/* Horizontal lines */}
-        <line x1="0" y1="10" x2="40" y2="10" stroke="#FFBF00" strokeWidth="1" />
-        <line x1="0" y1="30" x2="40" y2="30" stroke="#FFBF00" strokeWidth="0.5" />
-        {/* Diagonal accent */}
-        <line x1="0" y1="0" x2="20" y2="20" stroke="#fff" strokeWidth="0.5" />
-        <line x1="20" y1="20" x2="40" y2="0" stroke="#fff" strokeWidth="0.5" />
+        {/* Wavy lines */}
+        <path 
+          d="M 0 10 Q 10 5 20 10 T 40 10" 
+          stroke="#FFBF00" 
+          strokeWidth="1.5" 
+          fill="none" 
+        />
+        <path 
+          d="M 0 30 Q 10 25 20 30 T 40 30" 
+          stroke="#FFBF00" 
+          strokeWidth="1" 
+          fill="none" 
+        />
+        {/* Diagonal wavy accents */}
+        <path 
+          d="M 0 0 Q 10 10 20 0 T 40 0" 
+          stroke="#fff" 
+          strokeWidth="0.5" 
+          fill="none" 
+        />
         {/* Dot grid */}
         <circle cx="20" cy="20" r="1.5" fill="#FFBF00" />
       </pattern>

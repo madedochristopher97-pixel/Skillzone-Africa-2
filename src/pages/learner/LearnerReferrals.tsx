@@ -176,7 +176,7 @@ export default function LearnerReferrals() {
         aria-label="Referral program hero"
         className="relative bg-[#002366] rounded-[2rem] overflow-hidden shadow-lg"
       >
-        <SavannaPattern />
+        <SavannaPattern opacity={0.2} />
         <div className="relative z-10 grid md:grid-cols-2 gap-8 p-8 md:p-10 items-center">
           {/* Left */}
           <div className="space-y-5">

@@ -19,9 +19,10 @@ export default function InstructorCTA() {
           <div className="relative h-[400px] lg:h-auto">
             <img 
               alt="Instructor" 
-              className="absolute inset-0 w-full h-full object-cover" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ08ruaWi8YQ0Qro3A014ZGTUC8vRnf6RI8uRYXTEGQl-5GQTZhewhkMhpISLJZtPQ-xL0tPYsu9YjcDDpPqhRAb2zFNnEPVCiCuswP1_Yhj1iAifRDc2hD-qcVcd8e4zvH686Dpc2IBrYzI39H0YfJfcBYhdxXEEyCKpDdnLchTePye2YHp8wXn_xHglSh9VM1Y2tEuLtpfNLO7eJh8q6a-MQEondpd0YlJ6z1DaFheEthIO67MvC8_NDiRt-P5c8c1SY5WktNQ"
-              referrerPolicy="no-referrer"
+              className="absolute inset-0 w-full h-full object-contain p-4 lg:p-8" 
+              src="/Skills CTA@2x.png"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
