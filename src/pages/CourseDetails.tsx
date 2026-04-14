@@ -113,18 +113,6 @@ export default function CourseDetails() {
       transition={{ duration: 0.5 }}
       className="bg-[#fcf9f4] min-h-screen font-body pb-24 relative"
     >
-      {/* Background Texture Pattern */}
-      <div 
-        className="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none z-0"
-        style={{ 
-          backgroundImage: 'url("/Patterns.jfif")',
-          backgroundSize: '300px',
-          backgroundRepeat: 'repeat',
-          mixBlendMode: 'multiply'
-        }}
-        aria-hidden="true"
-      />
-
       {/* Auth Modal Overlay */}
       <AnimatePresence>
         {showAuthModal && (
@@ -240,6 +228,17 @@ export default function CourseDetails() {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#00113a] to-[#002366] text-white pt-32 pb-20 px-6 relative overflow-hidden">
+        {/* Background Texture Pattern */}
+        <div 
+          className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none z-0"
+          style={{ 
+            backgroundImage: 'url("/Patterns.jfif")',
+            backgroundSize: '300px',
+            backgroundRepeat: 'repeat',
+            mixBlendMode: 'plus-lighter'
+          }}
+          aria-hidden="true"
+        />
         {/* Abstract Background Elements */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#ffdfa0]/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
